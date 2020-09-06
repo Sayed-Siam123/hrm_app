@@ -13,12 +13,13 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
       height: MediaQuery.of(context).size.height*0.30,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).backgroundColor,
         //color: Colors.green,
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(150),bottomRight: Radius.circular(150)),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(190),bottomRight: Radius.circular(190)),
         shape: BoxShape.rectangle,
       ),
       //color: Colors.red,
@@ -31,20 +32,51 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Hello,",style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 25,
-                    ),
-                  ),),
-                  Text("User",style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 25,
-                    ),
-                  ),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Text("Hello,",style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 25,
+                            ),
+                          ),),
+                          Text("User",style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 25,
+                            ),
+                          ),),
+                        ],
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(right:50.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("5th Sept,2020",style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500
+                            ),),
+                            Text("Present",style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500
+                            ),),
+                            Text("30 mins late",style: GoogleFonts.poppins(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w500
+                            ),),
+                          ],
+                        ),
+                      ),
+
+                    ],
+                  ),
                   SizedBox(height: 20,),
                   Center(
                     child: Container(

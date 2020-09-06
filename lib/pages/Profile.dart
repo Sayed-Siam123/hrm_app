@@ -10,7 +10,9 @@ import 'package:hrm_app/widget/HomeWidget/DrawerWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/FamilyInsuranceTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/InsuranceTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/LoanTabWidget.dart';
+import 'package:hrm_app/widget/ProfileWidget/SalaryTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/VisaTabWidget.dart';
+import 'package:logger/logger.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -22,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TabController _tabController;
+  var logger = Logger(); //logger object initiate
 
   Color back_profile = HexColor("#F2F2F2");
 
@@ -29,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = new TabController(length: 4, vsync: this);
+    _tabController = new TabController(length: 5, vsync: this);
   }
 
   @override
@@ -45,6 +48,8 @@ class _ProfilePageState extends State<ProfilePage>
         ),
         onPressed: () {
           print("Pressed");
+          logger.d("asass");  //logger message
+
           Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => LeaveRequestPage()),
@@ -90,21 +95,21 @@ class _ProfilePageState extends State<ProfilePage>
                                     alignment: Alignment.topCenter,
                                     color: Colors.white,
                                     child: TabBar(
-                                      indicatorWeight: 4,
+                                      indicatorWeight: 5,
                                       labelStyle: GoogleFonts.poppins(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 14),
                                       unselectedLabelColor: Colors.black87,
                                       labelColor: Colors.black87,
-                                      labelPadding: EdgeInsets.only(right: 0),
+                                      labelPadding: EdgeInsets.fromLTRB(20,0,20,0),
+                                      isScrollable: true,
                                       tabs: [
+                                        new Tab(text: "Salary"),
                                         new Tab(text: "Insurance"),
                                         new Tab(text: "Family Insurance"),
                                         new Tab(text: "Loan"),
-                                        new Tab(
-                                          text: "Visa",
-                                        ),
+                                        new Tab(text: "Visa"),
                                       ],
                                       controller: _tabController,
                                       indicatorColor:
@@ -120,6 +125,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   child: TabBarView(
                                     controller: _tabController,
                                     children: [
+                                      new SalaryTabWidget(),
                                       new InsuranceTabWidget(),
                                       new FamilyInsuranceTabWidget(),
                                       new LoanTabWidget(),
@@ -171,6 +177,9 @@ class _ProfilePageState extends State<ProfilePage>
                                         width: 40,
                                       ),
                                       IconButton(
+                                        onPressed: (){
+                                          print("Tapped here");
+                                        },
                                           icon: Icon(
                                         Icons.edit,
                                         color: Theme.of(context).buttonColor,

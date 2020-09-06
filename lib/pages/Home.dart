@@ -5,6 +5,7 @@ import 'package:hrm_app/widget/HomeWidget/DrawerWidget.dart';
 import 'package:hrm_app/widget/HomeWidget/HomeMiddleWidget.dart';
 import 'package:hrm_app/widget/HomeWidget/HomeTopWidget.dart';
 import 'package:hrm_app/widget/HomeWidget/MeetingTab.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,12 +16,51 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   int currentIndex = 0;
-
+  SuperTooltip tooltip;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  void onTap(){
+    if (tooltip != null && tooltip.isOpen) {
+      tooltip.close();
+      return;
+    }
+
+    RenderBox renderBox = context.findRenderObject();
+    final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+
+    var targetGlobalCenter =
+    renderBox.localToGlobal(renderBox.size.center(Offset.zero), ancestor: overlay);
+
+    // We create the tooltip on the first use
+    tooltip = SuperTooltip(
+      outsideBackgroundColor: Colors.transparent,
+      popupDirection: TooltipDirection.down,
+      arrowTipDistance: 15.0,
+      arrowBaseWidth: 20.0,
+      arrowLength: 20.0,
+      borderColor: Theme.of(context).buttonColor,
+      borderWidth: 3.0,
+      closeButtonSize: 20,
+      snapsFarAwayVertically: false,
+      showCloseButton: ShowCloseButton.inside,
+      hasShadow: false,
+      content: new Material(
+          child: Padding(
+            padding: const EdgeInsets.only(top:20.0),
+            child: Text(
+              "Please press Long to get IN",
+              style: GoogleFonts.poppins(),
+              softWrap: true,
+            ),
+          )),
+    );
+
+    tooltip.show(context);
   }
 
   @override
@@ -60,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                           shape: BoxShape.circle,
                           color: Theme.of(context).buttonColor      //TODO:: IN button
                         ),
-                        margin: EdgeInsets.only(top: 160),
+                        margin: EdgeInsets.only(top: 190),
                         child: Container(
                           height: 90,
                           width: 90,
@@ -68,19 +108,24 @@ class _HomePageState extends State<HomePage> {
                             shape: BoxShape.circle,
                             color: Theme.of(context).backgroundColor
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12.0),
-                              child: Center(
-                                child: Text(
-                                  "IN",
-                                  style: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                      )
+                          child: GestureDetector(
+                            onTap: (){
+                              onTap();
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12.0),
+                                child: Center(
+                                  child: Text(
+                                    "IN",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                        )
+                                    ),
                                   ),
                                 ),
-                              ),
+                            ),
                           ),
                         ),
                       ),

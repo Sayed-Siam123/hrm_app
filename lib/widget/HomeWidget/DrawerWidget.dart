@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/pages/Home.dart';
 import 'package:hrm_app/pages/LeaveRequest.dart';
+import 'package:hrm_app/pages/Login.dart';
+import 'package:hrm_app/pages/MyInsurance.dart';
+import 'package:hrm_app/pages/MyVisa.dart';
 import 'package:hrm_app/pages/Profile.dart';
 import 'package:hrm_app/pages/Request.dart';
+import 'package:hrm_app/pages/Resignation.dart';
 
 class DrawerWidget extends StatefulWidget {
   @override
@@ -95,6 +99,78 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LeaveRequestPage()),
+              );
+            },
+          ),
+
+          ListTile(
+            title: Text('My Insurance',style: GoogleFonts.exo2(
+              textStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),),
+            trailing:  new Icon(Icons.arrow_forward),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyInsurancePage()),
+              );
+            },
+          ),
+
+          ListTile(
+            title: Text('Resignation',style: GoogleFonts.exo2(
+              textStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),),
+            trailing:  new Icon(Icons.arrow_forward),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ResignationPage()),
+              );
+            },
+          ),
+
+          ListTile(
+            title: Text('My Visa',style: GoogleFonts.exo2(
+              textStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),),
+            trailing:  new Icon(Icons.arrow_forward),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyVisaPage()),
+              );
+            },
+          ),
+
+          ListTile(
+            title: Text('Logout',style: GoogleFonts.exo2(
+              textStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),),
+            trailing:  new Icon(Icons.arrow_forward),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage(status: false,)),
               );
             },
           ),

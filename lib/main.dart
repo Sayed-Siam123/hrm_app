@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:hrm_app/pages/Home.dart';
+import 'package:hrm_app/pages/Login.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'ColorLibrary/HexColor.dart';
@@ -58,7 +59,7 @@ class _SplashState extends State<Splash> {
       backgroundColor: Colors.white,
       seconds: 3,
       title: Text("HRM app"),
-      navigateAfterSeconds: HomePage(),
+      navigateAfterSeconds: LoginPage(status: true,),
       //title: new Text('IDENTIT',textScaleFactor: 2,),
       loadingText: Text("Loading"),
       photoSize: 150.0,

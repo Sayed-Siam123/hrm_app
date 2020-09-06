@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/ColorLibrary/HexColor.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class InsuranceTabWidget extends StatefulWidget {
@@ -9,6 +10,8 @@ class InsuranceTabWidget extends StatefulWidget {
 }
 
 class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
+  Color button_red = HexColor("#E8505B");
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,60 +19,80 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
         child: ResponsiveGridRow(
           children: [
             ResponsiveGridCol(
-              xs: 2,
-              md: 2,
+              xs: 1,
+              md: 1,
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    Text("#",style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500
+                    Text(
+                      "#",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
                       ),
-                    ),),
-                    SizedBox(
-                      height: 10,
                     ),
-                    Text("01",style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 13,
+                    SizedBox(
+                      height: 17,
+                    ),
+                    Text(
+                      "01",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          fontSize: 13,
+                        ),
                       ),
-                    ),),
-                    Text("02",style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 13,
+                    ),
+                    SizedBox(
+                      height: 36,
+                    ),
+                    Text(
+                      "02",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          fontSize: 13,
+                        ),
                       ),
-                    ),),
+                    ),
                   ],
                 ),
               ),
             ),
             ResponsiveGridCol(
-              xs: 4,
-              md: 4,
+              xs: 3,
+              md: 3,
               child: Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("Insurance Name",style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500
+                    Text(
+                      "Insurance Name",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
                       ),
-                    ),),
-                    SizedBox(
-                      height: 10,
                     ),
-                    Text("Metlife Alico",style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 13,
+                    SizedBox(
+                      height: 17,
+                    ),
+                    Text(
+                      "Metlife Alico",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          fontSize: 13,
+                        ),
                       ),
-                    ),),
-                    Text("Metlife Alico",style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        fontSize: 13,
+                    ),
+                    SizedBox(
+                      height: 36,
+                    ),
+                    Text(
+                      "Metlife Alico",
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          fontSize: 13,
+                        ),
                       ),
-                    ),),
+                    ),
                   ],
                 ),
               ),
@@ -81,31 +104,77 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("Expires On",style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500
+                      Text(
+                        "Policy Number",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
                         ),
-                      ),),
-                      SizedBox(
-                        height: 10,
                       ),
-
-
-                      Text("22-09-2020",style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                      SizedBox(
+                        height: 17,
+                      ),
+                      Text(
+                        "2002",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
                             fontSize: 13,
+                          ),
                         ),
-                      ),),
-                      Text("22-09-2020",style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                      ),
+                      SizedBox(
+                        height: 36,
+                      ),
+                      Text(
+                        "4001",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
                             fontSize: 13,
+                          ),
                         ),
-                      ),),
+                      ),
                     ]),
               ),
             ),
-
+            ResponsiveGridCol(
+              xs: 2,
+              md: 2,
+              child: Container(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Expires On",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 17,
+                      ),
+                      Text(
+                        "22-09-2020",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 36,
+                      ),
+                      Text(
+                        "22-09-2020",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ]),
+              ),
+            ),
             ResponsiveGridCol(
               xs: 3,
               md: 3,
@@ -113,56 +182,164 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text("",style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500
+                      Text(
+                        "Action",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
                         ),
-                      ),),
+                      ),
                       SizedBox(
                         height: 10,
                       ),
 
-
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("Edit",style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              color: Colors.red,
-                              decoration: TextDecoration.underline,
+                          Container(
+                            margin: EdgeInsets.only(left: 5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                    color: Colors.grey.shade300),
+                              ],
                             ),
-                          ),),
-                          SizedBox(width: 10,),
-                          Text("Renew",style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              color: Colors.red,
-                              decoration: TextDecoration.underline,
+                            child: SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: IconButton(
+                                onPressed: (){
+                                  print("Tapped1");
+                                },
+                                iconSize: 24,
+                                icon: Icon(Icons.edit),
+                                color: Theme.of(context).buttonColor,
+                                padding: EdgeInsets.all(5),
+                                //visualDensity: VisualDensity.comfortable,
+                              ),
                             ),
-                          ),),
+                          ),
+
+                          SizedBox(
+                            width: 10,
+                          ),
+
+                          GestureDetector(
+                            onTap: (){
+                              print("Tapped rn");
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(left: 0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                      color: Colors.grey.shade300),
+                                ],
+                              ),
+                              child: SizedBox(
+                                  height: 32,
+                                  width: 32,
+                                  child: Center(
+                                    child: Text(
+                                      "RN",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                            color: Theme.of(context).buttonColor,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                            ),
+                          ),
+
                         ],
+                      ),
+
+                      SizedBox(
+                        height: 20,
                       ),
 
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("Edit",style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              color: Colors.red,
-                              decoration: TextDecoration.underline,
+                          GestureDetector(
+                            child: Container(
+                              margin: EdgeInsets.only(left: 5),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                      color: Colors.grey.shade300),
+                                ],
+                              ),
+                              child: SizedBox(
+                                height: 32,
+                                width: 32,
+                                child: IconButton(
+                                  onPressed: (){
+                                    print("Tapped here also");
+                                  },
+                                  iconSize: 24,
+                                  icon: Icon(Icons.edit),
+                                  color: Theme.of(context).buttonColor,
+                                  padding: EdgeInsets.all(5),
+                                  //visualDensity: VisualDensity.comfortable,
+                                ),
+                              ),
                             ),
-                          ),),
-                          SizedBox(width: 10,),
-                          Text("Renew",style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              fontSize: 13,
-                              color: Colors.red,
-                              decoration: TextDecoration.underline,
+                            onTap: (){
+                              print("Tapped here also");
+                            },
+                          ),
+
+                          SizedBox(
+                            width: 10,
+                          ),
+
+                          GestureDetector(
+                            onTap: (){
+                              print("Tapped RN");
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(left: 0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                      color: Colors.grey.shade300),
+                                ],
+                              ),
+                              child: SizedBox(
+                                  height: 32,
+                                  width: 32,
+                                  child: Center(
+                                    child: Text(
+                                      "RN",
+                                      style: GoogleFonts.poppins(
+                                        textStyle: TextStyle(
+                                          color: Theme.of(context).buttonColor,
+                                          fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                    ),
+                                  )),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ]),
