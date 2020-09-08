@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class HomeTopWidget extends StatefulWidget {
@@ -9,12 +12,38 @@ class HomeTopWidget extends StatefulWidget {
   _HomeTopWidgetState createState() => _HomeTopWidgetState();
 }
 
+
 class _HomeTopWidgetState extends State<HomeTopWidget> {
+
+  DateTime selectedDateofExpire = DateTime.now();
+  DateFormat formatter = DateFormat('d MMM, yyyy');
+  String formatted;
+
+  getCurrentDate() {
+    DateTime date = new DateTime.now();
+
+    setState(() {
+      formatted = formatter.format(date);
+    });
+
+    print(formatted.toString());
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(Duration(milliseconds: 50), () {
+      getCurrentDate();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-      height: MediaQuery.of(context).size.height*0.30,
+      margin: EdgeInsets.fromLTRB(0, 19, 0, 0),
+      height: MediaQuery.of(context).size.height*0.32,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).backgroundColor,
@@ -36,6 +65,7 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text("Hello,",style: GoogleFonts.poppins(
                             textStyle: TextStyle(
@@ -59,7 +89,7 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("5th Sept,2020",style: GoogleFonts.poppins(
+                            Text(formatted.toString(),style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontWeight: FontWeight.w500
                             ),),

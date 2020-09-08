@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/ColorLibrary/HexColor.dart';
 import 'package:hrm_app/pages/MyInsurance.dart';
-import 'package:hrm_app/widget/HomeWidget/DrawerWidget.dart';
+import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -188,7 +188,9 @@ class _ResignationPageState extends State<ResignationPage> {
                                 margin:
                                 EdgeInsets.fromLTRB(5, 15, 15, 0),
                                 child: CheckboxListTile(
-                                  title: Text("I accept the terms and condition of Resignation",style: GoogleFonts.poppins(),),
+                                  title: Text("I accept the terms and condition of Resignation",style: GoogleFonts.poppins(
+                                    color: Theme.of(context).buttonColor,
+                                  ),),
                                   activeColor: Theme.of(context).buttonColor,
                                   value: checkStatus,
                                   onChanged: (newValue) {

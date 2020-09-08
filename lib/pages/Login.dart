@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/helper/MainPage.dart';
 import 'package:hrm_app/pages/Home.dart';
-import 'package:hrm_app/widget/HomeWidget/DrawerWidget.dart';
+import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class LoginPage extends StatefulWidget {
@@ -139,7 +140,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 onTap: (){
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(builder: (context) => MainPage()),
                                   );
                                 },
                                 child: Container(

@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/ColorLibrary/HexColor.dart';
 import 'package:hrm_app/pages/LeaveRequest.dart';
-import 'package:hrm_app/widget/HomeWidget/DrawerWidget.dart';
+import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/FamilyInsuranceTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/InsuranceTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/LoanTabWidget.dart';
@@ -16,6 +16,11 @@ import 'package:logger/logger.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class ProfilePage extends StatefulWidget {
+
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  const ProfilePage({Key key, this.scaffoldKey}) : super(key: key);
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -38,24 +43,6 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerWidget(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).buttonColor,
-        child: Icon(
-          Icons.add,
-          size: 40,
-        ),
-        onPressed: () {
-          print("Pressed");
-          logger.d("asass");  //logger message
-
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LeaveRequestPage()),
-          );
-        },
-      ),
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: CustomScrollView(
@@ -68,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage>
                   Icons.menu,
                   color: Colors.white,
                 ),
-                onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                onPressed: () => widget.scaffoldKey.currentState.openDrawer(),
               ),
             ),
             SliverList(
@@ -76,9 +63,10 @@ class _ProfilePageState extends State<ProfilePage>
                 Stack(
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 250, 0, 0),
+                      margin: EdgeInsets.fromLTRB(0, 195, 0, 0),
                       color: back_profile,
-                      height: MediaQuery.of(context).size.height,
+                      height:
+                      MediaQuery.of(context).size.height * 0.6,
                       width: MediaQuery.of(context).size.width,
                       child: ResponsiveGridRow(
                         children: [
@@ -102,7 +90,8 @@ class _ProfilePageState extends State<ProfilePage>
                                           fontSize: 14),
                                       unselectedLabelColor: Colors.black87,
                                       labelColor: Colors.black87,
-                                      labelPadding: EdgeInsets.fromLTRB(20,0,20,0),
+                                      labelPadding:
+                                          EdgeInsets.fromLTRB(20, 0, 20, 0),
                                       isScrollable: true,
                                       tabs: [
                                         new Tab(text: "Salary"),
@@ -120,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage>
                                 ),
                                 Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.9,
+                                  MediaQuery.of(context).size.height * 0.52,
                                   width: MediaQuery.of(context).size.width,
                                   child: TabBarView(
                                     controller: _tabController,
@@ -140,9 +129,9 @@ class _ProfilePageState extends State<ProfilePage>
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       color: Theme.of(context).backgroundColor,
-                      height: 200,
+                      height: 190,
                       width: MediaQuery.of(context).size.width,
                       child: ResponsiveGridRow(
                         children: [
@@ -154,8 +143,7 @@ class _ProfilePageState extends State<ProfilePage>
                                   padding: EdgeInsets.only(left: 85),
                                   width: 300,
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Container(
@@ -177,13 +165,13 @@ class _ProfilePageState extends State<ProfilePage>
                                         width: 40,
                                       ),
                                       IconButton(
-                                        onPressed: (){
-                                          print("Tapped here");
-                                        },
+                                          onPressed: () {
+                                            print("Tapped here");
+                                          },
                                           icon: Icon(
-                                        Icons.edit,
-                                        color: Theme.of(context).buttonColor,
-                                      ))
+                                            Icons.edit,
+                                            color: Theme.of(context).buttonColor,
+                                          ))
                                     ],
                                   ),
                                 ),

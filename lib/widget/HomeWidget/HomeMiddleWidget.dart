@@ -31,59 +31,79 @@ class _HomeMiddleWidgetState extends State<HomeMiddleWidget> with SingleTickerPr
       width: double.infinity,
       color: Theme.of(context).accentColor,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0,0,0,50),
+        padding: EdgeInsets.fromLTRB(0,90,0,0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.error_outline,color: Theme.of(context).buttonColor,),
+              icon: Icon(Icons.info_outline,color: Theme.of(context).buttonColor,),
               onPressed: (){
                 print("Pressed");
               },
             ),
-            SizedBox(height: 0,),
-            Container(
-              width: 360,
-              color: Colors.white,
-              margin: EdgeInsets.only(),
-              child: TabBar(
-                indicatorWeight: 4,
-                labelStyle: GoogleFonts.poppins(
-                    color: Colors.black, fontWeight: FontWeight.w600),
-                unselectedLabelColor: Colors.black45,
-                labelColor: Theme.of(context).buttonColor,
-                labelPadding: EdgeInsets.all(0),
-                tabs: [
-                  new Tab(
-                    text: "Notifications",
-                  ),
-                  new Tab(
-                      text: "Events"
-                  ),
-                  new Tab(
-                      text: "Meeting"
-                  ),
-                  new Tab(
-                      text: "View All"
-                  ),
+            Text("Full month view",
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                    fontSize: 14, fontWeight: FontWeight.w500),
+              ),),
+            SizedBox(height: 5,),
+            Padding(
+              padding: EdgeInsets.fromLTRB(30,30,30,30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text("Notifications",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w500),
+                    ),),
+                  Text("View All",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.w500,color: Colors.red.shade500),
+                    ),)
                 ],
-                controller: _tabController,
-                indicatorColor: Colors.transparent,
-                indicatorSize: TabBarIndicatorSize.label,
               ),
             ),
-
-            Container(
-              height: 100,
-              width: 100,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  new NotificationTab(),
-                  new EventsTab(),
-                  new MeetingTab(),
-                  new ViewAllTab(),
-                ],
+            Card(
+              shadowColor: Colors.grey.withOpacity(1),
+              color: Colors.white,
+              child: Container(
+                height: 80,
+                width: MediaQuery.of(context).size.width*.9,
+                child: ListTile(
+                  title: Text("Salary Notification",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500,color: Colors.red.shade500),
+                    ),),
+                  subtitle: Text("Your salary deposited. Thank you",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 13,color: Colors.black87),
+                    ),),
+                ),
+              ),
+            ),
+            Card(
+              shadowColor: Colors.grey.withOpacity(1),
+              color: Colors.white,
+              child: Container(
+                height: 80,
+                width: MediaQuery.of(context).size.width*.9,
+                child: ListTile(
+                  title: Text("Salary Notification",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500,color: Colors.red.shade500),
+                    ),),
+                  subtitle: Text("Your salary deposited. Thank you",
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                          fontSize: 13,color: Colors.black87),
+                    ),),
+                ),
               ),
             ),
           ],
