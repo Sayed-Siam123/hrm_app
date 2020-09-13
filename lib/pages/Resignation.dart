@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/ColorLibrary/HexColor.dart';
+import 'package:hrm_app/helper/MainPage.dart';
 import 'package:hrm_app/pages/MyInsurance.dart';
 import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:intl/intl.dart';
@@ -52,215 +53,223 @@ class _ResignationPageState extends State<ResignationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerWidget(),
-      body: Container(
-        color: Theme.of(context).accentColor,
-        child: CustomScrollView(slivers: <Widget>[
-          SliverAppBar(
-            title: Text(
-              "Resignation",
-              style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      color: Theme.of(context).buttonColor,
-                      fontWeight: FontWeight.w500)),
-            ),
-            centerTitle: true,
-            backgroundColor: Theme.of(context).accentColor,
-            elevation: 0,
-            leading: new IconButton(
-              icon: new Icon(
-                Icons.menu,
-                color: Theme.of(context).buttonColor,
+    return WillPopScope(
+      onWillPop: (){
+        return Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+        );
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: DrawerWidget(scaffoldKey: _scaffoldKey,),
+        body: Container(
+          color: Theme.of(context).accentColor,
+          child: CustomScrollView(slivers: <Widget>[
+            SliverAppBar(
+              title: Text(
+                "Resignation",
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Theme.of(context).buttonColor,
+                        fontWeight: FontWeight.w500)),
               ),
-              onPressed: () => _scaffoldKey.currentState.openDrawer(),
+              centerTitle: true,
+              backgroundColor: Theme.of(context).accentColor,
+              elevation: 0,
+              leading: new IconButton(
+                icon: new Icon(
+                  Icons.menu,
+                  color: Theme.of(context).buttonColor,
+                ),
+                onPressed: () => _scaffoldKey.currentState.openDrawer(),
+              ),
             ),
-          ),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Stack(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                  color: back_profile,
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  width: MediaQuery.of(context).size.width,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: ResponsiveGridRow(
-                      children:[
-                        ResponsiveGridCol(
-                          lg: 12,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+            SliverList(
+                delegate: SliverChildListDelegate([
+              Stack(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    color: back_profile,
+                    height: MediaQuery.of(context).size.height * 0.9,
+                    width: MediaQuery.of(context).size.width,
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                      child: ResponsiveGridRow(
+                        children:[
+                          ResponsiveGridCol(
+                            lg: 12,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
 
 
-                              Container(
-                                  height: 55,
-                                  width:
-                                  MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.fromLTRB(15, 40, 15, 0),
-                                  padding: EdgeInsets.fromLTRB(15, 4, 15, 0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                    BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 5.0,
-                                          spreadRadius: 5.0,
-                                          offset: Offset(1, 1),
-                                          color: Colors.grey.shade600
-                                              .withOpacity(0.1)),
-                                    ],
-                                  ),
-                                  child: TextField(
-                                    controller: applyDate,
-                                    enabled: true,
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      suffixIcon: IconButton(
-                                        icon: Icon(
-                                          Icons.calendar_today,
-                                          color: Theme.of(context)
-                                              .buttonColor
-                                              .withOpacity(0.4),
+                                Container(
+                                    height: 55,
+                                    width:
+                                    MediaQuery.of(context).size.width,
+                                    margin: EdgeInsets.fromLTRB(15, 40, 15, 0),
+                                    padding: EdgeInsets.fromLTRB(15, 4, 15, 0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 5.0,
+                                            spreadRadius: 5.0,
+                                            offset: Offset(1, 1),
+                                            color: Colors.grey.shade600
+                                                .withOpacity(0.1)),
+                                      ],
+                                    ),
+                                    child: TextField(
+                                      controller: applyDate,
+                                      enabled: true,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        errorBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            Icons.calendar_today,
+                                            color: Theme.of(context)
+                                                .buttonColor
+                                                .withOpacity(0.4),
+                                          ),
+                                          onPressed: () {
+                                            _selectExpireDate(context);
+                                            print("apply");
+                                          },
                                         ),
-                                        onPressed: () {
-                                          _selectExpireDate(context);
-                                          print("apply");
-                                        },
+                                        hintText: "Date to apply",
+                                        hintStyle: GoogleFonts.poppins(
+                                          textStyle:
+                                          TextStyle(fontSize: 16),
+                                        ),
                                       ),
-                                      hintText: "Date to apply",
-                                      hintStyle: GoogleFonts.poppins(
-                                        textStyle:
-                                        TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                  )),
+                                    )),
 
-                              Container(
-                                  height: 55,
-                                  width:
-                                  MediaQuery.of(context).size.width,
+                                Container(
+                                    height: 55,
+                                    width:
+                                    MediaQuery.of(context).size.width,
+                                    margin:
+                                    EdgeInsets.fromLTRB(15, 15, 15, 0),
+                                    padding:
+                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 5.0,
+                                            spreadRadius: 5.0,
+                                            offset: Offset(1, 1),
+                                            color: Colors.grey.shade600
+                                                .withOpacity(0.1)),
+                                      ],
+                                    ),
+                                    child: TextField(
+                                      controller: loan_amount,
+                                      enabled: true,
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        errorBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
+                                        hintText: "Notes*",
+                                        hintStyle: GoogleFonts.poppins(
+                                          textStyle:
+                                          TextStyle(fontSize: 16),
+                                        ),
+                                      ),
+                                    )),
+
+
+                                Container(
                                   margin:
-                                  EdgeInsets.fromLTRB(15, 15, 15, 0),
-                                  padding:
-                                  EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                    BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 5.0,
-                                          spreadRadius: 5.0,
-                                          offset: Offset(1, 1),
-                                          color: Colors.grey.shade600
-                                              .withOpacity(0.1)),
-                                    ],
+                                  EdgeInsets.fromLTRB(5, 15, 15, 0),
+                                  child: CheckboxListTile(
+                                    title: Text("I accept the terms and condition of Resignation",style: GoogleFonts.poppins(
+                                      color: Theme.of(context).buttonColor,
+                                    ),),
+                                    activeColor: Theme.of(context).buttonColor,
+                                    value: checkStatus,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        checkStatus = newValue;
+                                      });
+                                      print(newValue.toString());
+                                    },
+                                    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
                                   ),
-                                  child: TextField(
-                                    controller: loan_amount,
-                                    enabled: true,
-                                    decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                      hintText: "Notes*",
-                                      hintStyle: GoogleFonts.poppins(
-                                        textStyle:
-                                        TextStyle(fontSize: 16),
-                                      ),
-                                    ),
-                                  )),
+                                ),
 
 
-                              Container(
-                                margin:
-                                EdgeInsets.fromLTRB(5, 15, 15, 0),
-                                child: CheckboxListTile(
-                                  title: Text("I accept the terms and condition of Resignation",style: GoogleFonts.poppins(
-                                    color: Theme.of(context).buttonColor,
-                                  ),),
-                                  activeColor: Theme.of(context).buttonColor,
-                                  value: checkStatus,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      checkStatus = newValue;
-                                    });
-                                    print(newValue.toString());
+                                InkWell(
+                                  onTap: (){
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(builder: (context) => HomePage()),
+                                    // );
                                   },
-                                  controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                                ),
-                              ),
-
-
-                              InkWell(
-                                onTap: (){
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(builder: (context) => HomePage()),
-                                  // );
-                                },
-                                child: Container(
-                                  height: 55,
-                                  width:
-                                  MediaQuery.of(context).size.width,
-                                  margin:
-                                  EdgeInsets.fromLTRB(15, 130, 15, 0),
-                                  padding:
-                                  EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).buttonColor,
-                                    borderRadius:
-                                    BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 5.0,
-                                          spreadRadius: 5.0,
-                                          offset: Offset(1, 1),
-                                          color: Colors.grey.shade600
-                                              .withOpacity(0.1)),
-                                    ],
-                                  ),
-                                  child: Center(
-                                    child: Text("APPLY",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
+                                  child: Container(
+                                    height: 55,
+                                    width:
+                                    MediaQuery.of(context).size.width,
+                                    margin:
+                                    EdgeInsets.fromLTRB(15, 130, 15, 0),
+                                    padding:
+                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).buttonColor,
+                                      borderRadius:
+                                      BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            blurRadius: 5.0,
+                                            spreadRadius: 5.0,
+                                            offset: Offset(1, 1),
+                                            color: Colors.grey.shade600
+                                                .withOpacity(0.1)),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: Text("APPLY",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
 
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  height: MediaQuery.of(context).size.width * 0.05,
-                  width: MediaQuery.of(context).size.width,
-                ),
-              ],
-            ),
-          ])),
-        ]),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    height: MediaQuery.of(context).size.width * 0.05,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ],
+              ),
+            ])),
+          ]),
+        ),
       ),
     );
   }

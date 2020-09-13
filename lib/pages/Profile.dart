@@ -10,6 +10,7 @@ import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/FamilyInsuranceTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/InsuranceTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/LoanTabWidget.dart';
+import 'package:hrm_app/widget/ProfileWidget/MyEmployeesTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/SalaryTabWidget.dart';
 import 'package:hrm_app/widget/ProfileWidget/VisaTabWidget.dart';
 import 'package:logger/logger.dart';
@@ -17,17 +18,15 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 class ProfilePage extends StatefulWidget {
 
-  final GlobalKey<ScaffoldState> scaffoldKey;
-
-  const ProfilePage({Key key, this.scaffoldKey}) : super(key: key);
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  final GlobalKey<ScaffoldState> _scaffoldKey_Profile = new GlobalKey<ScaffoldState>();
+
   TabController _tabController;
   var logger = Logger(); //logger object initiate
 
@@ -37,12 +36,14 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = new TabController(length: 5, vsync: this);
+    _tabController = new TabController(length: 6, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey_Profile,
+      drawer: DrawerWidget(scaffoldKey: _scaffoldKey_Profile,),
       body: Container(
         color: Theme.of(context).backgroundColor,
         child: CustomScrollView(
@@ -55,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage>
                   Icons.menu,
                   color: Colors.white,
                 ),
-                onPressed: () => widget.scaffoldKey.currentState.openDrawer(),
+                onPressed: () => _scaffoldKey_Profile.currentState.openDrawer(),
               ),
             ),
             SliverList(
@@ -83,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     alignment: Alignment.topCenter,
                                     color: Colors.white,
                                     child: TabBar(
-                                      indicatorWeight: 5,
+                                      indicatorWeight: 6,
                                       labelStyle: GoogleFonts.poppins(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -99,6 +100,7 @@ class _ProfilePageState extends State<ProfilePage>
                                         new Tab(text: "Family Insurance"),
                                         new Tab(text: "Loan"),
                                         new Tab(text: "Visa"),
+                                        new Tab(text: "My Employees"),
                                       ],
                                       controller: _tabController,
                                       indicatorColor:
@@ -119,6 +121,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       new FamilyInsuranceTabWidget(),
                                       new LoanTabWidget(),
                                       new VisaTabWidget(),
+                                      new MyEmployeesTabWidget(),
                                     ],
                                   ),
                                 ),

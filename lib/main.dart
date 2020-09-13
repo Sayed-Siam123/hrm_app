@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:hrm_app/helper/MainPage.dart';
 import 'package:hrm_app/pages/Home.dart';
 import 'package:hrm_app/pages/Login.dart';
+import 'package:hrm_app/resources/SharedPrefer.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'ColorLibrary/HexColor.dart';
@@ -12,7 +16,7 @@ void main() async{
   // AppLanguage appLanguage = AppLanguage();
   // await appLanguage.fetchLocale();
   await GlobalConfiguration().loadFromAsset("config");
-  print("base_url: ${GlobalConfiguration().getString('base_url')}"); // need to use for api call
+  print("base_url: ${GlobalConfiguration().getString('base_url1')}"); // need to use for api call
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
     statusBarColor: Colors.transparent,
@@ -53,13 +57,61 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+
+  SessionManager prefs = SessionManager();
+
+  String userid = "";
+
+  String loginStatus = '';
+
+
+  String loginKey = "loginKey";
+  String useridKey = "userid";
+  String loginName = "loginName";
+  String userDesignation = "userDesignation";
+  String PresentStatus = "PresentStatus";
+  String LateStatus = "LateStatus";
+  String Intimes = "Intimes";
+  String MonthPresent = "MonthPresent";
+  String MonthAbesnt = "MonthAbesnt";
+  String MonthLeave = "MonthLeave";
+  String MonthLate = "MonthLate";
+
+  void getLogin() async {
+    Future<String> serverip = prefs.getData(loginKey);
+    serverip.then((data) async {
+      print('login status pabo');
+      print("login status " + data.toString());
+
+      setState(() {
+        loginStatus = data.toString();
+      });
+      print(loginStatus.toString());
+
+//      Future.delayed(const Duration(milliseconds: 1000), () {
+//
+//      });
+    }, onError: (e) {
+      print(e);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer(Duration(milliseconds: 50), () {
+      getLogin();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
       backgroundColor: Colors.white,
       seconds: 3,
       title: Text("HRM app"),
-      navigateAfterSeconds: LoginPage(status: true,),
+      navigateAfterSeconds: loginStatus == "false" || loginStatus == "null" ? LoginPage(status: true,) : MainPage(currentIndex: 0,),
       //title: new Text('IDENTIT',textScaleFactor: 2,),
       loadingText: Text("Loading"),
       photoSize: 150.0,

@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/pages/LeaveRequest.dart';
+import 'package:hrm_app/pages/MyInsurance.dart';
+import 'package:hrm_app/pages/MyLoan.dart';
+import 'package:hrm_app/pages/MyVisa.dart';
+import 'package:hrm_app/pages/Resignation.dart';
 
 class RequestTabWidget extends StatefulWidget {
   @override
@@ -73,56 +78,27 @@ class _RequestTabWidgetState extends State<RequestTabWidget> {
                 ],
               ),
               width: 150.0,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Leave",
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text(
-                      "Request",
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Container(
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.only(top: 0, left: 0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 5.0,
-                      spreadRadius: 1.0,
-                      color: Colors.grey.shade300),
-                ],
-              ),
-              child: Container(
-                width: 150.0,
+              child: GestureDetector(
+                onTap: (){
+                  print("sasa");
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LeaveRequestPage()),
+                  );
+
+                },
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Renew",
+                        "Leave",
                         style: GoogleFonts.poppins(
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                        "Visa",
+                        "Request",
                         style: GoogleFonts.poppins(
                           fontSize: 18,
                         ),
@@ -150,27 +126,180 @@ class _RequestTabWidgetState extends State<RequestTabWidget> {
               ),
               child: Container(
                 width: 150.0,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Renew",
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
+                child: GestureDetector(
+                  onTap: (){
+                    print("sasa");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyVisaPage()),
+                    );
+                  },
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Renew",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Insurance",
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
+                        Text(
+                          "Visa",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              margin: EdgeInsets.all(5),
+              padding: EdgeInsets.only(top: 0, left: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 5.0,
+                      spreadRadius: 1.0,
+                      color: Colors.grey.shade300),
+                ],
+              ),
+              child: Container(
+                width: 150.0,
+                child: GestureDetector(
+                  onTap: (){
+                    print("sasa");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyInsurancePage()),
+                    );
+                  },
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Renew",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          "Insurance",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              width: 10,
+            ),
+
+            Container(
+              margin: EdgeInsets.all(5),
+              padding: EdgeInsets.only(top: 0, left: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 5.0,
+                      spreadRadius: 1.0,
+                      color: Colors.grey.shade300),
+                ],
+              ),
+              child: Container(
+                width: 150.0,
+                child: GestureDetector(
+                  onTap: (){
+                    print("sasa");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyLoanPage()),
+                    );
+                  },
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Apply",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          "Loan",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+
+            SizedBox(
+              width: 10,
+            ),
+
+            Container(
+              margin: EdgeInsets.all(5),
+              padding: EdgeInsets.only(top: 0, left: 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 5.0,
+                      spreadRadius: 1.0,
+                      color: Colors.grey.shade300),
+                ],
+              ),
+              child: Container(
+                width: 150.0,
+                child: GestureDetector(
+                  onTap: (){
+                    print("sasa");
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => ResignationPage()),
+                    );
+                  },
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Resignation",
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
           ],
         ));
   }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/ColorLibrary/HexColor.dart';
 import 'package:hrm_app/helper/DrawerWidget.dart';
+import 'package:hrm_app/helper/MainPage.dart';
+import 'package:hrm_app/pages/Request.dart';
 import 'package:hrm_app/widget/LeaveRequestWidget/LeaveTextBoxPart.dart';
 import 'package:hrm_app/widget/LeaveRequestWidget/LeaveTopPart.dart';
 import 'package:intl/intl.dart';
@@ -20,52 +22,60 @@ class _LeaveRequestPageState extends State<LeaveRequestPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerWidget(),
-      body: Container(
-        color: Theme.of(context).backgroundColor,
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              backgroundColor: Theme.of(context).backgroundColor,
-              elevation: 0,
-              leading: new IconButton(
-                icon: new Icon(
-                  Icons.menu,
-                  color: Colors.white,
+    return WillPopScope(
+      onWillPop: (){
+        return Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+        );
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: DrawerWidget(scaffoldKey: _scaffoldKey,),
+        body: Container(
+          color: Theme.of(context).backgroundColor,
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                backgroundColor: Theme.of(context).backgroundColor,
+                elevation: 0,
+                leading: new IconButton(
+                  icon: new Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                  ),
+                  onPressed: () => _scaffoldKey.currentState.openDrawer(),
                 ),
-                onPressed: () => _scaffoldKey.currentState.openDrawer(),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                Stack(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.fromLTRB(0, 250, 0, 0),
-                      color: back_profile,
-                      height: MediaQuery.of(context).size.height * 0.73,
-                      width: MediaQuery.of(context).size.width,
-                      child: ResponsiveGridRow(
-                        children: [
-                          ResponsiveGridCol(
-                            lg: 12,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[],
-                            ),
-                          )
-                        ],
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Stack(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 250, 0, 0),
+                        color: back_profile,
+                        height: MediaQuery.of(context).size.height * 0.73,
+                        width: MediaQuery.of(context).size.width,
+                        child: ResponsiveGridRow(
+                          children: [
+                            ResponsiveGridCol(
+                              lg: 12,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    LeaveTopPart(),
-                    LeaveTextBoxPart(),
-                  ],
-                )
-              ]),
-            )
-          ],
+                      LeaveTopPart(),
+                      LeaveTextBoxPart(),
+                    ],
+                  )
+                ]),
+              )
+            ],
+          ),
         ),
       ),
     );

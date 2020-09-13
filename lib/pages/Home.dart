@@ -13,16 +13,12 @@ import 'package:super_tooltip/super_tooltip.dart';
 
 class HomePage extends StatefulWidget {
 
-  final GlobalKey<ScaffoldState> scaffoldKey;
-
-  const HomePage({Key key, this.scaffoldKey}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey_home = new GlobalKey<ScaffoldState>();
 
   int currentIndex = 1;
   SuperTooltip tooltip;
@@ -74,68 +70,73 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          backgroundColor: Theme.of(context).backgroundColor,
-          elevation: 0,
-          leading: new IconButton(
-            icon: new Icon(
-              Icons.menu,
-              color: Colors.white,
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      key: _scaffoldKey_home,
+      drawer: DrawerWidget(scaffoldKey: _scaffoldKey_home,),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: Theme.of(context).backgroundColor,
+            elevation: 0,
+            leading: new IconButton(
+              icon: new Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              onPressed: () => _scaffoldKey_home.currentState.openDrawer(),
             ),
-            onPressed: () => widget.scaffoldKey.currentState.openDrawer(),
           ),
-        ),
-        SliverList(
-          delegate: SliverChildListDelegate([
-            Stack(
-              children: <Widget>[
-                HomeMiddleWidget(), //TODO:: tabbar
-                HomeTopWidget(), //TODO:: username,absent-present status
-                Center(
-                  child: Container(
-                    width: 120.0,
-                    height: 120.0,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Theme.of(context).buttonColor //TODO:: IN button
-                        ),
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * .25),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Stack(
+                children: <Widget>[
+                  HomeMiddleWidget(), //TODO:: tabbar
+                  HomeTopWidget(), //TODO:: username,absent-present status
+                  Center(
                     child: Container(
-                      height: 90,
-                      width: 90,
+                      width: 120.0,
+                      height: 120.0,
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Theme.of(context).backgroundColor),
-                      child: GestureDetector(
-                        onTap: () {
-                          onTap();
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.0),
-                          child: Center(
-                            child: Text(
-                              "IN",
-                              style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              )),
+                          color: Theme.of(context).buttonColor //TODO:: IN button
+                          ),
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * .25),
+                      child: Container(
+                        height: 90,
+                        width: 90,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Theme.of(context).backgroundColor),
+                        child: GestureDetector(
+                          onTap: () {
+                            onTap();
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: Center(
+                              child: Text(
+                                "IN",
+                                style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                )),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ]),
-        )
-      ],
+                ],
+              ),
+            ]),
+          )
+        ],
+      ),
     );
   }
 }

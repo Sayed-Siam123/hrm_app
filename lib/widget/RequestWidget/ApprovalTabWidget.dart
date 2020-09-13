@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/Bloc/approval_bloc.dart';
 import 'package:hrm_app/widget/ApprovalTabWidget/LeaveTab.dart';
-import 'package:hrm_app/widget/ApprovalTabWidget/ServiceTab.dart';
-import 'package:hrm_app/widget/ApprovalTabWidget/StoreTab.dart';
+import 'package:hrm_app/widget/ApprovalTabWidget/InsuranceTab.dart';
+import 'package:hrm_app/widget/ApprovalTabWidget/LoanTab.dart';
+import 'package:hrm_app/widget/ApprovalTabWidget/ResignationTab.dart';
+import 'package:hrm_app/widget/ApprovalTabWidget/VisaTab.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import 'MeetingsTabWidget.dart';
@@ -22,7 +25,8 @@ class _ApprovalTabWidgetState extends State<ApprovalTabWidget>  with SingleTicke
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this);
+    _tabController = new TabController(length: 5, vsync: this);
+    approvalbloc.fetchAllLeaveApprovaldata();
   }
 
   @override
@@ -36,7 +40,7 @@ class _ApprovalTabWidgetState extends State<ApprovalTabWidget>  with SingleTicke
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 70, 0, 0),
                   color: Colors.white,
-                  height: MediaQuery.of(context).size.height*.8,
+                  height: MediaQuery.of(context).size.height*.9,
                   width: MediaQuery.of(context).size.width,
                   child: ResponsiveGridRow(
                     children: [
@@ -45,14 +49,16 @@ class _ApprovalTabWidgetState extends State<ApprovalTabWidget>  with SingleTicke
                         child: Column(
                           children: <Widget>[
                             Container(
-                              height: MediaQuery.of(context).size.height*.7,
+                              height: MediaQuery.of(context).size.height*.6,
                               width: MediaQuery.of(context).size.width,
                               child: TabBarView(
                                 controller: _tabController,
                                 children: [
                                   new LeaveTab(),
-                                  new StoreTab(),
-                                  new ServiceTab(),
+                                  new VisaTab(),
+                                  new InsuranceTab(),
+                                  new LoanTab(),
+                                  new ResignationTab(),
                                 ],
                               ),
                             ),
@@ -78,34 +84,28 @@ class _ApprovalTabWidgetState extends State<ApprovalTabWidget>  with SingleTicke
                               children: <Widget>[
                                 Container(
                                   margin: EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                  width: 200,
+                                  width: MediaQuery.of(context).size.width*.9,
                                   child: TabBar(
-                                    indicatorWeight: 3,
+                                    indicatorWeight: 5,
                                     labelStyle: GoogleFonts.poppins(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 16),
                                     unselectedLabelColor: Colors.grey.shade400,
                                     labelColor: Colors.black87,
-                                    labelPadding: EdgeInsets.all(0),
+                                    labelPadding: EdgeInsets.only(left: 25),
                                     tabs: [
                                       new Tab(
                                         text: "Leave",
                                       ),
-                                      new Tab(text: "Store"),
-                                      new Tab(text: "Service"),
+                                      new Tab(text: "Visa"),
+                                      new Tab(text: "Insurance"),
+                                      new Tab(text: "Loan"),
+                                      new Tab(text: "Resignation"),
                                     ],
                                     controller: _tabController,
                                     indicatorColor: Colors.transparent,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(0, 0, 30, 0),
-                                  width: 70,
-                                  child: Text("View All",style: GoogleFonts.poppins(
-                                        color: Theme.of(context).buttonColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16),
+                                    isScrollable: true,
                                   ),
                                 ),
                               ],

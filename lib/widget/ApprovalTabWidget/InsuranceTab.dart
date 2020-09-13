@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
-class ServiceTab extends StatefulWidget {
+class InsuranceTab extends StatefulWidget {
   @override
-  _ServiceTabState createState() => _ServiceTabState();
+  _InsuranceTabState createState() => _InsuranceTabState();
 }
 
-class _ServiceTabState extends State<ServiceTab> {
+class _InsuranceTabState extends State<InsuranceTab> {
   @override
   Widget build(BuildContext context) {
     return Container(

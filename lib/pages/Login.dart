@@ -1,10 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/Bloc/user_bloc.dart';
 import 'package:hrm_app/helper/MainPage.dart';
+import 'package:hrm_app/models/Userlogin_Model.dart';
 import 'package:hrm_app/pages/Home.dart';
 import 'package:hrm_app/helper/DrawerWidget.dart';
+import 'package:hrm_app/resources/SharedPrefer.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,18 +23,56 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  TextEditingController email = new TextEditingController();
-  TextEditingController password = new TextEditingController();
 
+  SessionManager prefs = SessionManager();
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final email = new TextEditingController();
+  final password = new TextEditingController();
+  UserLogin_model user;
   GifController controller;
+  bool loginPress=false;
+
+  UserLogin_model fetchedData;
+
+  String loginKey = "loginKey";
+  String useridKey = "userid";
+  String loginName = "loginName";
+  String userDesignation = "userDesignation";
+  String PresentStatus = "PresentStatus";
+  String LateStatus = "LateStatus";
+  String Intimes = "Intimes";
+  String MonthPresent = "MonthPresent";
+  String MonthAbesnt = "MonthAbesnt";
+  String MonthLeave = "MonthLeave";
+  String MonthLate = "MonthLate";
+
+
+
+  bool _validate1;
+  bool _validate2;
+
+  String errortext1 = "*user id can\'t be empty";
+  String errortext2 = "*password can\'t be empty";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = GifController(value: 26,vsync: this,duration: Duration(milliseconds: 200),reverseDuration: Duration(milliseconds: 200));
     print(widget.status.toString());
+    email.text = null;
+    password.text = null;
+    setState(() {
+      loginPress = false;
+    });
+    print(loginPress.toString());
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    userbloc.dispose();
   }
 
   @override
@@ -57,7 +100,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                       children: [
                         ResponsiveGridCol(
                           lg: 12,
-                          child: Column(
+                          child: loginPress == false? Column(
                             children: <Widget>[
                               Container(
                                   height: 55,
@@ -81,8 +124,18 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     ],
                                   ),
                                   child: TextField(
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
                                     controller: email,
-                                    enabled: true,
+                                    onTap: (){
+                                      setState(() {
+                                        loginPress = false;
+                                      });
+                                      print(loginPress.toString());
+                                    },
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                       focusedBorder: InputBorder.none,
@@ -94,6 +147,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         textStyle:
                                         TextStyle(fontSize: 16),
                                       ),
+                                      errorText: _validate1 == false ? errortext1 : null,
                                     ),
                                   )),
 
@@ -119,8 +173,18 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     ],
                                   ),
                                   child: TextField(
+                                    onTap: (){
+                                      setState(() {
+                                        loginPress = false;
+                                      });
+                                      print(loginPress.toString());
+                                    },
+                                    style: GoogleFonts.poppins(
+                                      textStyle: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
                                     controller: password,
-                                    enabled: true,
                                     obscureText: true,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
@@ -133,17 +197,11 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         textStyle:
                                         TextStyle(fontSize: 16),
                                       ),
+                                      errorText: _validate2 == false ? errortext2 : null,
                                     ),
                                   )),
 
-                              InkWell(
-                                onTap: (){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => MainPage()),
-                                  );
-                                },
-                                child: Container(
+                              Container(
                                   height: 55,
                                   width:
                                   MediaQuery.of(context).size.width,
@@ -165,21 +223,173 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                     ],
                                   ),
                                   child: Center(
-                                    child: Text("LOGIN",
-                                      style: GoogleFonts.poppins(
-                                        textStyle: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
+                                    child: FlatButton(
+                                      onPressed: (){
+                                        if (email.text.isEmpty &&
+                                            email.text == "") {
+                                          print("KHali");
+
+                                          setState(() {
+                                            _validate2 = true;
+                                            _validate1 = false;
+                                          });
+
+                                          //TODO:: Toast hobe ekta
+                                        } else if (password.text.isEmpty &&
+                                            password.text == "") {
+                                          print("eitao KHali");
+
+                                          setState(() {
+                                            _validate1 = true;
+                                            _validate2 = false;
+                                          });
+
+                                          //TODO:: Toast hobe ekta
+                                        } else {
+                                          setState(() {
+                                            _validate1 = true;
+                                            _validate2 = true;
+                                          });
+                                        }
+                                        print("Vora");
+
+
+                                        if (_validate1 && _validate2) {
+                                          print(email.text);
+                                          print(password.text);
+                                          //userbloc.getuser_id(email.text);
+                                          //userbloc.getUser_pass(password.text);
+                                          user = UserLogin_model(
+                                            UserId: email.text,
+                                            Password: password.text,
+                                          );
+
+                                          setState(() {
+                                            loginPress = true;
+                                          });
+                                          userbloc.userlogin(user);
+                                          print(loginPress);
+                                          userbloc.dispose();
+
+
+                                          print("Full Valid");
+                                          email.text = "";
+                                          password.text = "";
+
+                                          // Navigator.push(
+                                          //         context,
+                                          //         MaterialPageRoute(
+                                          //             builder: (context) =>
+                                          //                 MainPage(
+                                          //                   currentIndex: 0,
+                                          //                 )),
+                                          //       );
+                                              }
+
+                                      },
+                                      child: Text("LOGIN",
+                                        style: GoogleFonts.poppins(
+                                          textStyle: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
 
                                 ),
-                              ),
                             ],
-                          ),
-                        )
+                          ):
+
+                          //Text("Login Pressed"),
+
+                          loginPress == true ? Builder(
+                            builder: (context) {
+                              return Center(
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height*.2,
+                                  width: 300,
+                                  child: StreamBuilder<UserLogin_model>(
+                                    stream: userbloc.LoginSuccessData,
+                                    builder:
+                                        (context, AsyncSnapshot<UserLogin_model> snapshot) {
+                                      if (snapshot.hasData) {
+                                        fetchedData = snapshot.data;
+                                        //_newData = fetcheddata;
+                                        print("Login:: " + snapshot.data.Name.toString());
+                                        if (snapshot.data.LogStatus.toString() == "true") {
+                                          print("Login:: " + snapshot.data.LogStatus.toString());
+
+                                          WidgetsBinding.instance.addPostFrameCallback((_){  // this will call for setState()
+
+                                            prefs.setData(loginKey, snapshot.data.LogStatus.toString());
+                                            prefs.setData(useridKey, snapshot.data.UserId.toString());
+                                            prefs.setData(loginName, snapshot.data.Name.toString());
+                                            prefs.setData(userDesignation, snapshot.data.Designation.toString());
+                                            prefs.setData(PresentStatus, snapshot.data.PresentStatus.toString());
+                                            prefs.setData(LateStatus, snapshot.data.LateStatus.toString());
+                                            prefs.setData(Intimes, snapshot.data.Intimes.toString());
+                                            prefs.setData(MonthPresent, snapshot.data.MonthPresent.toString());
+                                            prefs.setData(MonthAbesnt, snapshot.data.MonthAbesnt.toString());
+                                            prefs.setData(MonthLeave, snapshot.data.MonthLeave.toString());
+                                            prefs.setData(MonthLate, snapshot.data.MonthLate.toString());
+
+                                            Timer(Duration(seconds: 3), () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+                                              );
+                                            });    //TODO:: DELAY EXAMPLE
+                                            print("Login True");
+
+                                          });
+                                          userbloc.dispose();
+
+                                        } else if (snapshot.data.LogStatus.toString() == "false") {
+                                          print("if false Login:: " + snapshot.data.LogStatus.toString());
+
+                                          WidgetsBinding.instance.addPostFrameCallback((_){
+                                            prefs.setData(loginKey, "false");
+                                            setState(() {
+                                              loginPress = false;
+                                            });
+                                            print("Login False");
+                                            Scaffold.of(context).showSnackBar(SnackBar(
+                                              content: Text(
+                                                'Incorrect UserID or Password!',
+                                                style: GoogleFonts.exo2(
+                                                  textStyle: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              duration: Duration(seconds: 4),
+                                            ));
+
+                                          });
+                                          userbloc.dispose();
+
+                                        }
+                                      } else if (snapshot.hasError) {
+                                        return Text("${snapshot.error}");
+                                      }
+
+                                      return Center(child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: <Widget>[
+                                          CircularProgressIndicator(),
+                                          Text("Logging in...")
+                                        ],
+                                      ));
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                          ) : Center(child: Text("OK!"),),
+                        ),
                       ],
                     )
                   ),

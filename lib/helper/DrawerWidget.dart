@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/Bloc/user_bloc.dart';
 import 'package:hrm_app/helper/MainPage.dart';
 import 'package:hrm_app/pages/Home.dart';
 import 'package:hrm_app/pages/LeaveRequest.dart';
@@ -10,6 +13,7 @@ import 'package:hrm_app/pages/MyVisa.dart';
 import 'package:hrm_app/pages/Profile.dart';
 import 'package:hrm_app/pages/Request.dart';
 import 'package:hrm_app/pages/Resignation.dart';
+import 'package:hrm_app/resources/SharedPrefer.dart';
 
 class DrawerWidget extends StatefulWidget {
 
@@ -21,6 +25,21 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+
+  String loginKey = "loginKey";
+  String useridKey = "userid";
+  String loginName = "loginName";
+  String userDesignation = "userDesignation";
+  String PresentStatus = "PresentStatus";
+  String LateStatus = "LateStatus";
+  String Intimes = "Intimes";
+  String MonthPresent = "MonthPresent";
+  String MonthAbesnt = "MonthAbesnt";
+  String MonthLeave = "MonthLeave";
+  String MonthLate = "MonthLate";
+
+  SessionManager prefs = SessionManager();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -35,6 +54,25 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             decoration: BoxDecoration(
               color: Colors.amberAccent,
             ),
+          ),
+
+
+          ListTile(
+            title: Text('Home',style: GoogleFonts.exo2(
+              textStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+              ),
+            ),),
+            trailing:  new Icon(Icons.arrow_forward),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+              );
+            },
           ),
 
           ListTile(
@@ -120,15 +158,38 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             onTap: () {
               // Update the state of the app.
               // ...
-              widget.scaffoldKey.currentState.openEndDrawer();
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage(status: false,)),
-              );
+              logout();
+
+              Timer(Duration(seconds: 2), () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage(status: false,)),
+                );
+              });
+
             },
           ),
         ],
       ),
     );
   }
+
+  void logout() async {
+    userbloc.dispose();
+    await prefs.setData(loginKey,null);
+    await prefs.setData(loginName,null);
+    await prefs.setData(userDesignation,null);
+    await prefs.setData(PresentStatus,null);
+    await prefs.setData(LateStatus,null);
+    await prefs.setData(Intimes,null);
+    await prefs.setData(MonthPresent,null);
+    await prefs.setData(MonthAbesnt,null);
+    await prefs.setData(MonthLeave,null);
+    await prefs.setData(MonthLate,null);
+
+    print("LOgged out");
+
+  }
+
+
 }

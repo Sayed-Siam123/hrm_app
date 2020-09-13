@@ -6,6 +6,7 @@ import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeTopWidget extends StatefulWidget {
   @override
@@ -18,6 +19,18 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
   DateTime selectedDateofExpire = DateTime.now();
   DateFormat formatter = DateFormat('d MMM, yyyy');
   String formatted;
+
+  String loginKey = "loginKey";
+  String useridKey = "userid";
+  String loginName = "loginName";
+  String userDesignation = "userDesignation";
+  String PresentStatus = "PresentStatus";
+  String LateStatus = "LateStatus";
+  String Intimes = "Intimes";
+  String MonthPresent = "MonthPresent";
+  String MonthAbesnt = "MonthAbesnt";
+  String MonthLeave = "MonthLeave";
+  String MonthLate = "MonthLate";
 
   getCurrentDate() {
     DateTime date = new DateTime.now();
@@ -74,13 +87,19 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                               fontSize: 25,
                             ),
                           ),),
-                          Text("User",style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 25,
-                            ),
-                          ),),
+                          FutureBuilder(
+                            future: getShared(loginName),
+                            initialData: false,
+                            builder: (context, snapshot) {
+                              return Text(snapshot.data==null ? "User":snapshot.data.toString(),style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 25,
+                                ),
+                              ),);
+                            },
+                          ),
                         ],
                       ),
 
@@ -93,14 +112,24 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                               color: Colors.white,
                               fontWeight: FontWeight.w500
                             ),),
-                            Text("Present",style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500
-                            ),),
-                            Text("30 mins late",style: GoogleFonts.poppins(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w500
-                            ),),
+                            FutureBuilder(
+                              future: getShared(PresentStatus),
+                              initialData: false,
+                              builder: (context, snapshot) {
+                                return Text(snapshot.data.toString(),style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500
+                                ),);
+                              },
+                            ),
+                            FutureBuilder(
+                              future: getShared(Intimes),
+                              initialData: false,
+                              builder: (context, snapshot) => Text(snapshot.data.toString(),style: GoogleFonts.poppins(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w500
+                              ),),
+                            ),
                           ],
                         ),
                       ),
@@ -127,13 +156,17 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                                   ),
                                 ),),
                                 SizedBox(height: 2,),
-                                Text("10"+" days",style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 11,
-                                  ),
-                                ),),
+                                FutureBuilder(
+                                  future: getShared(MonthPresent),
+                                  initialData: false,
+                                  builder: (context, snapshot) => Text(snapshot.data.toString()+" days",style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 11,
+                                    ),
+                                  ),),
+                                ),
                               ],
                             ),
 
@@ -147,13 +180,19 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                                   ),
                                 ),),
                                 SizedBox(height: 2,),
-                                Text("10"+" days",style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 11,
-                                  ),
-                                ),),
+
+
+                                FutureBuilder(
+                                  future: getShared(MonthAbesnt),
+                                  initialData: false,
+                                  builder: (context, snapshot) => Text(snapshot.data.toString()+" days",style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 11,
+                                    ),
+                                  ),),
+                                ),
                               ],
                             ),
 
@@ -167,13 +206,17 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                                   ),
                                 ),),
                                 SizedBox(height: 2,),
-                                Text("10"+" days",style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 11,
-                                  ),
-                                ),),
+                                FutureBuilder(
+                                  future: getShared(MonthLate),
+                                  initialData: false,
+                                  builder: (context, snapshot) => Text(snapshot.data.toString()+" days",style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 11,
+                                    ),
+                                  ),),
+                                ),
                               ],
                             ),
 
@@ -187,13 +230,18 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
                                   ),
                                 ),),
                                 SizedBox(height: 2,),
-                                Text("10"+" days",style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 11,
-                                  ),
-                                ),),
+
+                                FutureBuilder(
+                                  future: getShared(MonthLeave),
+                                  initialData: false,
+                                  builder: (context, snapshot) => Text(snapshot.data.toString()+" days",style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 11,
+                                    ),
+                                  ),),
+                                ),
                               ],
                             ),
                           ],
@@ -208,5 +256,21 @@ class _HomeTopWidgetState extends State<HomeTopWidget> {
         ],
       ),
     );
+  }
+
+  void putShared(String key, String val) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, val);
+  }
+
+  Future getShared(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String val = prefs.getString(key);
+    return val;
+  }
+
+  Future deleteShared(String key) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(key);
   }
 }

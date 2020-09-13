@@ -5,29 +5,30 @@ import 'package:hrm_app/pages/Profile.dart';
 import 'package:hrm_app/pages/Request.dart';
 
 class MainPage extends StatefulWidget {
+
+  int currentIndex = 0;
+
+  MainPage({this.currentIndex});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  int currentIndex = 0;
   final List<Widget> _children = [
-    HomePage(scaffoldKey: _scaffoldKey,),
-    RequestPage(scaffoldKey: _scaffoldKey,),
-    ProfilePage(scaffoldKey: _scaffoldKey,),
+    HomePage(),
+    RequestPage(),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerWidget(scaffoldKey: _scaffoldKey,),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: _children[currentIndex],
+      body: _children[widget.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).backgroundColor,
-        currentIndex: currentIndex,
+        currentIndex: widget.currentIndex,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -46,9 +47,9 @@ class _MainPageState extends State<MainPage> {
         ],
         onTap: (index){
           setState(() {
-            currentIndex = index;
+            widget.currentIndex = index;
           });
-          print(currentIndex.toString());
+          print(widget.currentIndex.toString());
 
         },
         unselectedItemColor: Colors.white,
