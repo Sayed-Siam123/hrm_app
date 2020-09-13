@@ -1,10 +1,25 @@
 import 'package:hrm_app/models/Userlogin_Model.dart';
+import 'package:hrm_app/resources/SharedPrefer.dart';
 import 'package:hrm_app/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class user_bloc {
   final _repository = Repository();
+  SessionManager prefs = SessionManager();
 
+  String loginKey = "loginKey";
+  String useridKey = "userid";
+  String loginName = "loginName";
+  String userDesignation = "userDesignation";
+  String PresentStatus = "PresentStatus";
+  String LateStatus = "LateStatus";
+  String Intimes = "Intimes";
+  String MonthPresent = "MonthPresent";
+  String MonthAbesnt = "MonthAbesnt";
+  String MonthLeave = "MonthLeave";
+  String MonthLate = "MonthLate";
+  
+  
   // ignore: close_sinks
   final Uid = BehaviorSubject<String>();
 
@@ -27,6 +42,20 @@ class user_bloc {
   userlogin(UserLogin_model data) async {
     print("data:: " + data.UserId.toString() + " " + data.Password.toString());
     UserLogin_model success = await _repository.userlogin(data.UserId.toString(),data.Password.toString());
+
+
+    prefs.setData(loginKey, success.LogStatus.toString());
+    prefs.setData(useridKey, success.UserId.toString());
+    prefs.setData(loginName, success.Name.toString());
+    prefs.setData(userDesignation, success.Designation.toString());
+    prefs.setData(PresentStatus, success.PresentStatus.toString());
+    prefs.setData(LateStatus, success.LateStatus.toString());
+    prefs.setData(Intimes, success.Intimes.toString());
+    prefs.setData(MonthPresent, success.MonthPresent.toString());
+    prefs.setData(MonthAbesnt, success.MonthAbesnt.toString());
+    prefs.setData(MonthLeave, success.MonthLeave.toString());
+    prefs.setData(MonthLate, success.MonthLate.toString());
+    
     _LoginSuccessFetcher.sink.add(success);
   }
 
@@ -39,7 +68,7 @@ class user_bloc {
     loginsuccess.value = null;
 
     await _LoginSuccessFetcher.drain();
-    _LoginSuccessFetcher.close();
+    await _LoginSuccessFetcher.close();
   }
 }
 

@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
         accentColor: second_layer,
         focusColor: nav_bar,
         hintColor: word_hint,
+        fontFamily: 'Poppins',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Splash(),

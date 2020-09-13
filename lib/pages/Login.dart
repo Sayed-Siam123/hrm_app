@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_gifimage/flutter_gifimage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/Bloc/user_bloc.dart';
@@ -12,9 +13,10 @@ import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:hrm_app/resources/SharedPrefer.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatefulWidget {
 
-  final bool status;
+  bool status;
 
   LoginPage({this.status});
 
@@ -66,6 +68,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
       loginPress = false;
     });
     print(loginPress.toString());
+    fetchedData = null;
   }
 
   @override
@@ -266,7 +269,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                                           setState(() {
                                             loginPress = true;
+                                            fetchedData = null;
                                           });
+
                                           userbloc.userlogin(user);
                                           print(loginPress);
                                           userbloc.dispose();
@@ -321,29 +326,30 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         if (snapshot.data.LogStatus.toString() == "true") {
                                           print("Login:: " + snapshot.data.LogStatus.toString());
 
-                                          WidgetsBinding.instance.addPostFrameCallback((_){  // this will call for setState()
 
-                                            prefs.setData(loginKey, snapshot.data.LogStatus.toString());
-                                            prefs.setData(useridKey, snapshot.data.UserId.toString());
-                                            prefs.setData(loginName, snapshot.data.Name.toString());
-                                            prefs.setData(userDesignation, snapshot.data.Designation.toString());
-                                            prefs.setData(PresentStatus, snapshot.data.PresentStatus.toString());
-                                            prefs.setData(LateStatus, snapshot.data.LateStatus.toString());
-                                            prefs.setData(Intimes, snapshot.data.Intimes.toString());
-                                            prefs.setData(MonthPresent, snapshot.data.MonthPresent.toString());
-                                            prefs.setData(MonthAbesnt, snapshot.data.MonthAbesnt.toString());
-                                            prefs.setData(MonthLeave, snapshot.data.MonthLeave.toString());
-                                            prefs.setData(MonthLate, snapshot.data.MonthLate.toString());
+                                          if(loginPress){
+                                            print("Here login press is: "+loginPress.toString());
+                                            SchedulerBinding.instance.addPostFrameCallback((_) {
+                                              Timer(Duration(seconds: 2), () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+                                                );
+                                              });    //TODO:: DELAY EXAMPLE
+                                              print("Login True");
+                                            });
+                                          }
 
-                                            Timer(Duration(seconds: 3), () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
-                                              );
-                                            });    //TODO:: DELAY EXAMPLE
-                                            print("Login True");
-
-                                          });
+                                          // WidgetsBinding.instance.addPostFrameCallback((_){  // this will call for setState()
+                                          //   Timer(Duration(seconds: 2), () {
+                                          //     Navigator.push(
+                                          //       context,
+                                          //       MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+                                          //     );
+                                          //   });    //TODO:: DELAY EXAMPLE
+                                          //   print("Login True");
+                                          //
+                                          // });
                                           userbloc.dispose();
 
                                         } else if (snapshot.data.LogStatus.toString() == "false") {

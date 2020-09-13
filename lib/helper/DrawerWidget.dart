@@ -176,16 +176,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   void logout() async {
     userbloc.dispose();
-    await prefs.setData(loginKey,null);
-    await prefs.setData(loginName,null);
-    await prefs.setData(userDesignation,null);
-    await prefs.setData(PresentStatus,null);
-    await prefs.setData(LateStatus,null);
-    await prefs.setData(Intimes,null);
-    await prefs.setData(MonthPresent,null);
-    await prefs.setData(MonthAbesnt,null);
-    await prefs.setData(MonthLeave,null);
-    await prefs.setData(MonthLate,null);
+    prefs.setData(loginKey,null);
+    prefs.setData(loginName,null);
+    prefs.setData(userDesignation,null);
+    prefs.setData(PresentStatus,null);
+    prefs.setData(LateStatus,null);
+    prefs.setData(Intimes,null);
+    prefs.setData(MonthPresent,null);
+    prefs.setData(MonthAbesnt,null);
+    prefs.setData(MonthLeave,null);
+    prefs.setData(MonthLate,null);
 
     print("LOgged out");
 

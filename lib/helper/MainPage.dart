@@ -6,7 +6,7 @@ import 'package:hrm_app/pages/Request.dart';
 
 class MainPage extends StatefulWidget {
 
-  int currentIndex = 0;
+  int currentIndex;
 
   MainPage({this.currentIndex});
 
