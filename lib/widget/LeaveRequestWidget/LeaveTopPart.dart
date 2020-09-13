@@ -82,7 +82,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
 
               //eikhan theke streamer run korbe
 
-              SizedBox(width: 30,),
+              SizedBox(width: 20,),
 
               Text(
                 "ASSIGNED",
@@ -94,7 +94,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
                 ),
               ),
 
-              SizedBox(width: 30,),
+              SizedBox(width: 20,),
 
               Text(
                 "ENJOYED",
@@ -106,7 +106,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
                 ),
               ),
 
-              SizedBox(width: 30,),
+              SizedBox(width: 20,),
 
               Text(
                 "REMAINS",
@@ -128,7 +128,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
             itemCount: fetcheddata.length,
             itemBuilder: (context, index) {
               return Container(
-                margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                margin: EdgeInsets.fromLTRB(55, 0, 55, 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,7 +148,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
 
                     //eikhan theke streamer run korbe
 
-                    SizedBox(width: 10,),
+                    SizedBox(width: 0,),
 
                     Container(
                       width: 20,
@@ -163,7 +163,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
                       ),
                     ),
 
-                    SizedBox(width: 10,),
+                    SizedBox(width: 0,),
 
                     Container(
                       width: 20,
@@ -178,7 +178,7 @@ class _LeaveTopPartState extends State<LeaveTopPart> {
                       ),
                     ),
 
-                    SizedBox(width: 10,),
+                    SizedBox(width: 0,),
 
                     Container(
                       width: 20,

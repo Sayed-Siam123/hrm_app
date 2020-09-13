@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/Bloc/leave_request_bloc.dart';
 import 'package:hrm_app/ColorLibrary/HexColor.dart';
 import 'package:hrm_app/helper/MainPage.dart';
+import 'package:hrm_app/models/VisaSubmit_Model.dart';
 import 'package:hrm_app/pages/MyInsurance.dart';
 import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:intl/intl.dart';
@@ -23,12 +27,22 @@ class _MyVisaPageState extends State<MyVisaPage> {
 
   DateTime expire_date = DateTime.now();
   DateTime renew_date = DateTime.now();
-  DateFormat formatter = DateFormat('dd-MM-yyyy');
+  DateFormat formatter = DateFormat('dd/MM/yyyy');
   String formatted;
   TextEditingController expireDate = new TextEditingController();
   TextEditingController renewDate = new TextEditingController();
   TextEditingController renewCity = new TextEditingController();
 
+
+  bool _validate1;
+  bool _validate2;
+  bool _validate3;
+
+  String errortext1 = "*Date can\'t be empty";
+  String errortext2 = "*Date can\'t be empty";
+  String errortext3 = "*Leave reason can\'t be empty";
+
+  VisaSubmit data;
 
   _selectRenewDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -75,10 +89,58 @@ class _MyVisaPageState extends State<MyVisaPage> {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: DrawerWidget(scaffoldKey: _scaffoldKey,),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Theme.of(context).backgroundColor,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.storage),
+              title: Text("Request"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text("Profile"),
+            ),
+          ],
+          onTap: (index){
+            if(index.toString()=="0"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+              );
+            }
+
+            else if(index.toString()=="1"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+              );
+            }
+
+            else if(index.toString()=="2"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 2,)),
+              );
+            }
+
+          },
+          iconSize: 25,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+        ),
         body: Container(
           color: Theme.of(context).accentColor,
           child: CustomScrollView(slivers: <Widget>[
             SliverAppBar(
+              floating: true,
               title: Text(
                 "My Visa",
                 style: GoogleFonts.poppins(
@@ -149,6 +211,10 @@ class _MyVisaPageState extends State<MyVisaPage> {
                                           textStyle:
                                           TextStyle(fontSize: 16),
                                         ),
+                                        errorText: _validate1 == false ? errortext1 : null,
+                                        contentPadding: _validate1 == false ? EdgeInsets
+                                            .fromLTRB(0, 20, 0, 0) : EdgeInsets.fromLTRB(
+                                            0, 15, 0, 0),
                                       ),
                                     )),
 
@@ -200,6 +266,10 @@ class _MyVisaPageState extends State<MyVisaPage> {
                                           textStyle:
                                           TextStyle(fontSize: 16),
                                         ),
+                                        errorText: _validate2 == false ? errortext2 : null,
+                                        contentPadding: _validate2 == false ? EdgeInsets
+                                            .fromLTRB(0, 20, 0, 0) : EdgeInsets.fromLTRB(
+                                            0, 15, 0, 0),
                                       ),
                                     )),
 
@@ -251,15 +321,16 @@ class _MyVisaPageState extends State<MyVisaPage> {
                                           textStyle:
                                           TextStyle(fontSize: 16),
                                         ),
+                                        errorText: _validate3 == false ? errortext3 : null,
+                                        contentPadding: _validate3 == false ? EdgeInsets
+                                            .fromLTRB(0, 20, 0, 0) : EdgeInsets.fromLTRB(
+                                            0, 15, 0, 0),
                                       ),
                                     )),
 
                                 InkWell(
                                   onTap: (){
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => HomePage()),
-                                    // );
+
                                   },
                                   child: Container(
                                     height: 55,
@@ -298,45 +369,117 @@ class _MyVisaPageState extends State<MyVisaPage> {
                                 ),
 
 
-                                InkWell(
-                                  onTap: (){
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => HomePage()),
-                                    // );
-                                  },
-                                  child: Container(
-                                    height: 55,
-                                    width:
-                                    MediaQuery.of(context).size.width,
-                                    margin:
-                                    EdgeInsets.fromLTRB(15, 20, 15, 0),
-                                    padding:
-                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).buttonColor,
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurRadius: 5.0,
-                                            spreadRadius: 5.0,
-                                            offset: Offset(1, 1),
-                                            color: Colors.grey.shade600
-                                                .withOpacity(0.1)),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: Text("SAVE",
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
+                                Builder(
+                                  builder: (context) => InkWell(
+                                    onTap: (){
+                                      if (renewCity.text.isEmpty && renewCity.text == "") {
+                                        print("KHali");
+
+                                        setState(() {
+                                          _validate2 = true;
+                                          _validate1 = false;
+                                          _validate3 = true;
+                                        });
+
+                                        //TODO:: Toast hobe ekta
+                                      } else if (renewDate.text.isEmpty && renewDate.text == "") {
+                                        print("eitao KHali");
+
+                                        setState(() {
+                                          _validate1 = true;
+                                          _validate2 = false;
+                                          _validate3 = true;
+                                        });
+
+                                        //TODO:: Toast hobe ekta
+                                      } else if (expireDate.text.isEmpty &&
+                                          expireDate.text == "") {
+                                        setState(() {
+                                          _validate1 = true;
+                                          _validate2 = true;
+                                          _validate3 = false;
+                                        });
+                                      } else {
+                                        _validate1 = true;
+                                        _validate2 = true;
+                                        _validate3 = true;
+                                      }
+                                      print("Vora");
+
+
+                                      data = VisaSubmit(
+                                        IssueCity: renewCity.text.toString(),
+                                        IssueDate: renewDate.text.toString(),
+                                        ExpDate: expireDate.text.toString(),
+                                      );
+
+                                      Timer(Duration(milliseconds: 50), () {
+                                        Scaffold.of(context).showSnackBar(SnackBar(
+                                          content: Text(
+                                            'Applied Successfully',
+                                            style: GoogleFonts.exo2(
+                                              textStyle: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          duration: Duration(seconds: 2),
+                                        ));
+                                      });
+
+                                      Timer(Duration(seconds: 2), () {
+                                        print(renewDate.text.toString() + "," +
+                                            renewCity.toString());
+
+                                        leaverequestbloc.CreateVisaPost(data);
+                                        leaverequestbloc.dispose();
+
+
+                                        renewDate.text = "";
+                                        renewCity.text = "";
+                                        expireDate.text = "";
+
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+                                        );
+
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 55,
+                                      width:
+                                      MediaQuery.of(context).size.width,
+                                      margin:
+                                      EdgeInsets.fromLTRB(15, 20, 15, 0),
+                                      padding:
+                                      EdgeInsets.fromLTRB(15, 3, 5, 0),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).buttonColor,
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 5.0,
+                                              spreadRadius: 5.0,
+                                              offset: Offset(1, 1),
+                                              color: Colors.grey.shade600
+                                                  .withOpacity(0.1)),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text("SAVE",
+                                          style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
 
+                                    ),
                                   ),
                                 ),
                               ],

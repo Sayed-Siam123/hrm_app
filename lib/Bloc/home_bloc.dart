@@ -12,7 +12,7 @@ class home_bloc{
 
 
   fetchAllNotificationdata() async{
-    List<Notification_Model> notificationfetch = await _repository.fetchAllNotificationdata("6");
+    List<Notification_Model> notificationfetch = await _repository.fetchAllNotificationdata();
     _notificationdataFetcher.sink.add(notificationfetch);
   }
 

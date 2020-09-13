@@ -49,6 +49,7 @@ class _ProfilePageState extends State<ProfilePage>
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
+              floating: true,
               backgroundColor: Theme.of(context).backgroundColor,
               elevation: 0,
               leading: new IconButton(

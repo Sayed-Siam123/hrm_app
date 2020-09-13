@@ -87,6 +87,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
+              floating: true,
               backgroundColor: Theme.of(context).accentColor,
               elevation: 0,
             ),
@@ -269,26 +270,25 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
                                           setState(() {
                                             loginPress = true;
-                                            fetchedData = null;
                                           });
 
                                           userbloc.userlogin(user);
                                           print(loginPress);
-                                          userbloc.dispose();
+                                          //userbloc.dispose();
 
 
                                           print("Full Valid");
                                           email.text = "";
                                           password.text = "";
 
-                                          // Navigator.push(
-                                          //         context,
-                                          //         MaterialPageRoute(
-                                          //             builder: (context) =>
-                                          //                 MainPage(
-                                          //                   currentIndex: 0,
-                                          //                 )),
-                                          //       );
+                                          Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          MainPage(
+                                                            currentIndex: 0,
+                                                          )),
+                                                );
                                               }
 
                                       },
@@ -326,19 +326,19 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                         if (snapshot.data.LogStatus.toString() == "true") {
                                           print("Login:: " + snapshot.data.LogStatus.toString());
 
-
-                                          if(loginPress){
-                                            print("Here login press is: "+loginPress.toString());
-                                            SchedulerBinding.instance.addPostFrameCallback((_) {
-                                              Timer(Duration(seconds: 2), () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
-                                                );
-                                              });    //TODO:: DELAY EXAMPLE
-                                              print("Login True");
-                                            });
-                                          }
+                                          //
+                                          // if(loginPress){
+                                          //   print("Here login press is: "+loginPress.toString());
+                                          //   SchedulerBinding.instance.addPostFrameCallback((_) {
+                                          //     Timer(Duration(seconds: 2), () {
+                                          //       Navigator.push(
+                                          //         context,
+                                          //         MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+                                          //       );
+                                          //     });    //TODO:: DELAY EXAMPLE
+                                          //     print("Login True");
+                                          //   });
+                                          // }
 
                                           // WidgetsBinding.instance.addPostFrameCallback((_){  // this will call for setState()
                                           //   Timer(Duration(seconds: 2), () {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hrm_app/Bloc/leave_request_bloc.dart';
 import 'package:hrm_app/helper/MainPage.dart';
-import 'package:hrm_app/models/LeaveRequestPOSTdata_Model.dart';
+import 'package:hrm_app/models/LeaveRequestSubmit_Model.dart';
 import 'package:hrm_app/models/LeaveTypeCategory_Model.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -176,7 +176,7 @@ class _LeaveTextBoxPartState extends State<LeaveTextBoxPart> {
                               hint: Text(
                                 "Select Leave Type",
                                 style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(fontSize: 16),
+                                  textStyle: TextStyle(fontSize: 14),
                                 ),
                               ),
                               isExpanded: true,
@@ -201,7 +201,7 @@ class _LeaveTextBoxPartState extends State<LeaveTextBoxPart> {
                                       child: Text(
                                         value.type,
                                         style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(fontSize: 16),
+                                          textStyle: TextStyle(fontSize: 14),
                                         ),
                                       ),
                                     );
@@ -262,7 +262,7 @@ class _LeaveTextBoxPartState extends State<LeaveTextBoxPart> {
                               ),
                               hintText: "From",
                               hintStyle: GoogleFonts.poppins(
-                                textStyle: TextStyle(fontSize: 16),
+                                textStyle: TextStyle(fontSize: 14),
                               ),
                               errorText: _validate1 == false
                                   ? errortext1
@@ -358,7 +358,7 @@ class _LeaveTextBoxPartState extends State<LeaveTextBoxPart> {
                           disabledBorder: InputBorder.none,
                           hintText: "Leave reason",
                           hintStyle: GoogleFonts.poppins(
-                            textStyle: TextStyle(fontSize: 16),
+                            textStyle: TextStyle(fontSize: 14),
                           ),
                           errorText: _validate3 == false ? errortext3 : null,
                           contentPadding: _validate3 == false ? EdgeInsets
@@ -403,7 +403,6 @@ class _LeaveTextBoxPartState extends State<LeaveTextBoxPart> {
                     print("Vora");
 
                     data = LeaveRequestData(
-                        Uid: "6",
                         LeaveType: leaveTypeID.toString(),
                         FromDate: fromDate.text.toString(),
                         ToDate: toDate.text.toString(),
@@ -468,7 +467,7 @@ class _LeaveTextBoxPartState extends State<LeaveTextBoxPart> {
                         "APPLY",
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
-                            fontSize: 20,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

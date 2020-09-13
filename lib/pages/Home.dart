@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
+            floating: true,
             backgroundColor: Theme.of(context).backgroundColor,
             elevation: 0,
             leading: new IconButton(

@@ -24,7 +24,7 @@ class _RequestTabWidgetState extends State<RequestTabWidget> {
           child: Text(
             "Category",
             style:
-                GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w500),
+                GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
         SizedBox(
@@ -44,7 +44,7 @@ class _RequestTabWidgetState extends State<RequestTabWidget> {
           child: Text(
             "Recent",
             style:
-                GoogleFonts.poppins(fontSize: 22, fontWeight: FontWeight.w500),
+                GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
         Expanded(

@@ -26,7 +26,6 @@ class _ApprovalTabWidgetState extends State<ApprovalTabWidget>  with SingleTicke
     // TODO: implement initState
     super.initState();
     _tabController = new TabController(length: 5, vsync: this);
-    approvalbloc.fetchAllLeaveApprovaldata();
   }
 
   @override

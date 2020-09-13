@@ -41,11 +41,12 @@ class _HomeMiddleWidgetState extends State<HomeMiddleWidget>
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 70),
-      height: MediaQuery.of(context).size.height*.85,
+      height: MediaQuery.of(context).size.height * .85,
       width: double.infinity,
       color: Theme.of(context).accentColor,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(0, 240, 0, 0),
+        padding: EdgeInsets.fromLTRB(
+            0, MediaQuery.of(context).size.height * .3, 0, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -69,7 +70,7 @@ class _HomeMiddleWidgetState extends State<HomeMiddleWidget>
               height: 15,
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+              padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,14 +79,14 @@ class _HomeMiddleWidgetState extends State<HomeMiddleWidget>
                     "Notifications",
                     style: GoogleFonts.poppins(
                       textStyle:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                   ),
                   Text(
                     "View All",
                     style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                          fontSize: 22,
+                          fontSize: 16,
                           fontWeight: FontWeight.w500,
                           color: Colors.red.shade500),
                     ),
@@ -355,6 +356,7 @@ class _HomeMiddleWidgetState extends State<HomeMiddleWidget>
   Widget masterdataview(data) {
     return fetcheddata.length != 0
         ? RefreshIndicator(
+            color: Theme.of(context).backgroundColor,
             key: _refreshIndicatorKey,
             onRefresh: () {
               return homebloc.fetchAllNotificationdata();
@@ -375,7 +377,7 @@ class _HomeMiddleWidgetState extends State<HomeMiddleWidget>
                           data[index].NotTitle.toString(),
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.red.shade500),
                           ),

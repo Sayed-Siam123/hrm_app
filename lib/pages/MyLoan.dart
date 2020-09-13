@@ -61,10 +61,58 @@ class _MyLoanPageState extends State<MyLoanPage> {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: DrawerWidget(scaffoldKey: _scaffoldKey,),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Theme.of(context).backgroundColor,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.storage),
+              title: Text("Request"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text("Profile"),
+            ),
+          ],
+          onTap: (index){
+            if(index.toString()=="0"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+              );
+            }
+
+            else if(index.toString()=="1"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+              );
+            }
+
+            else if(index.toString()=="2"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 2,)),
+              );
+            }
+
+          },
+          iconSize: 25,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+        ),
         body: Container(
           color: Theme.of(context).accentColor,
           child: CustomScrollView(slivers: <Widget>[
             SliverAppBar(
+              floating: true,
               title: Text(
                 "My Loan",
                 style: GoogleFonts.poppins(

@@ -44,7 +44,7 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                         ),
                       ),
                       SizedBox(
-                        height: 36,
+                        height: 20,
                       ),
                       Text(
                         "02",
@@ -59,8 +59,8 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                 ),
               ),
               ResponsiveGridCol(
-                xs: 3,
-                md: 3,
+                xs: 4,
+                md: 4,
                 child: Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +84,7 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                         ),
                       ),
                       SizedBox(
-                        height: 36,
+                        height: 20,
                       ),
                       Text(
                         "Metlife Alico",
@@ -99,8 +99,8 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                 ),
               ),
               ResponsiveGridCol(
-                xs: 3,
-                md: 3,
+                xs: 4,
+                md: 4,
                 child: Container(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +124,7 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                           ),
                         ),
                         SizedBox(
-                          height: 36,
+                          height: 20,
                         ),
                         Text(
                           "4001",
@@ -138,8 +138,8 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                 ),
               ),
               ResponsiveGridCol(
-                xs: 2,
-                md: 2,
+                xs: 3,
+                md: 3,
                 child: Container(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +163,7 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                           ),
                         ),
                         SizedBox(
-                          height: 36,
+                          height: 20,
                         ),
                         Text(
                           "22-09-2020",
@@ -176,176 +176,176 @@ class _InsuranceTabWidgetState extends State<InsuranceTabWidget> {
                       ]),
                 ),
               ),
-              ResponsiveGridCol(
-                xs: 3,
-                md: 3,
-                child: Container(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Action",
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.only(left: 5),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 5.0,
-                                      spreadRadius: 1.0,
-                                      color: Colors.grey.shade300),
-                                ],
-                              ),
-                              child: SizedBox(
-                                height: 32,
-                                width: 32,
-                                child: IconButton(
-                                  onPressed: (){
-                                    print("Tapped1");
-                                  },
-                                  iconSize: 24,
-                                  icon: Icon(Icons.edit),
-                                  color: Theme.of(context).buttonColor,
-                                  padding: EdgeInsets.all(5),
-                                  //visualDensity: VisualDensity.comfortable,
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(
-                              width: 10,
-                            ),
-
-                            GestureDetector(
-                              onTap: (){
-                                print("Tapped rn");
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(left: 0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                        color: Colors.grey.shade300),
-                                  ],
-                                ),
-                                child: SizedBox(
-                                    height: 32,
-                                    width: 32,
-                                    child: Center(
-                                      child: Text(
-                                        "RN",
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                              color: Theme.of(context).buttonColor,
-                                              fontWeight: FontWeight.w600
-                                          ),
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                            ),
-
-                          ],
-                        ),
-
-                        SizedBox(
-                          height: 20,
-                        ),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: Container(
-                                margin: EdgeInsets.only(left: 5),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                        color: Colors.grey.shade300),
-                                  ],
-                                ),
-                                child: SizedBox(
-                                  height: 32,
-                                  width: 32,
-                                  child: IconButton(
-                                    onPressed: (){
-                                      print("Tapped here also");
-                                    },
-                                    iconSize: 24,
-                                    icon: Icon(Icons.edit),
-                                    color: Theme.of(context).buttonColor,
-                                    padding: EdgeInsets.all(5),
-                                    //visualDensity: VisualDensity.comfortable,
-                                  ),
-                                ),
-                              ),
-                              onTap: (){
-                                print("Tapped here also");
-                              },
-                            ),
-
-                            SizedBox(
-                              width: 10,
-                            ),
-
-                            GestureDetector(
-                              onTap: (){
-                                print("Tapped RN");
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(left: 0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 5.0,
-                                        spreadRadius: 1.0,
-                                        color: Colors.grey.shade300),
-                                  ],
-                                ),
-                                child: SizedBox(
-                                    height: 32,
-                                    width: 32,
-                                    child: Center(
-                                      child: Text(
-                                        "RN",
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                            color: Theme.of(context).buttonColor,
-                                            fontWeight: FontWeight.w600
-                                          ),
-                                        ),
-                                      ),
-                                    )),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ]),
-                ),
-              ),
+              // ResponsiveGridCol(
+              //   xs: 3,
+              //   md: 3,
+              //   child: Container(
+              //     child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: <Widget>[
+              //           Text(
+              //             "Action",
+              //             style: GoogleFonts.poppins(
+              //               textStyle: TextStyle(
+              //                   fontSize: 14, fontWeight: FontWeight.w500),
+              //             ),
+              //           ),
+              //           SizedBox(
+              //             height: 10,
+              //           ),
+              //
+              //           Row(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             children: <Widget>[
+              //               Container(
+              //                 margin: EdgeInsets.only(left: 5),
+              //                 decoration: BoxDecoration(
+              //                   shape: BoxShape.circle,
+              //                   color: Colors.white,
+              //                   boxShadow: [
+              //                     BoxShadow(
+              //                         blurRadius: 5.0,
+              //                         spreadRadius: 1.0,
+              //                         color: Colors.grey.shade300),
+              //                   ],
+              //                 ),
+              //                 child: SizedBox(
+              //                   height: 32,
+              //                   width: 32,
+              //                   child: IconButton(
+              //                     onPressed: (){
+              //                       print("Tapped1");
+              //                     },
+              //                     iconSize: 24,
+              //                     icon: Icon(Icons.edit),
+              //                     color: Theme.of(context).buttonColor,
+              //                     padding: EdgeInsets.all(5),
+              //                     //visualDensity: VisualDensity.comfortable,
+              //                   ),
+              //                 ),
+              //               ),
+              //
+              //               SizedBox(
+              //                 width: 10,
+              //               ),
+              //
+              //               GestureDetector(
+              //                 onTap: (){
+              //                   print("Tapped rn");
+              //                 },
+              //                 child: Container(
+              //                   margin: EdgeInsets.only(left: 0),
+              //                   decoration: BoxDecoration(
+              //                     shape: BoxShape.circle,
+              //                     color: Colors.white,
+              //                     boxShadow: [
+              //                       BoxShadow(
+              //                           blurRadius: 5.0,
+              //                           spreadRadius: 1.0,
+              //                           color: Colors.grey.shade300),
+              //                     ],
+              //                   ),
+              //                   child: SizedBox(
+              //                       height: 32,
+              //                       width: 32,
+              //                       child: Center(
+              //                         child: Text(
+              //                           "RN",
+              //                           style: GoogleFonts.poppins(
+              //                             textStyle: TextStyle(
+              //                                 color: Theme.of(context).buttonColor,
+              //                                 fontWeight: FontWeight.w600
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       )),
+              //                 ),
+              //               ),
+              //
+              //             ],
+              //           ),
+              //
+              //           SizedBox(
+              //             height: 20,
+              //           ),
+              //
+              //           Row(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             children: <Widget>[
+              //               GestureDetector(
+              //                 child: Container(
+              //                   margin: EdgeInsets.only(left: 5),
+              //                   decoration: BoxDecoration(
+              //                     shape: BoxShape.circle,
+              //                     color: Colors.white,
+              //                     boxShadow: [
+              //                       BoxShadow(
+              //                           blurRadius: 5.0,
+              //                           spreadRadius: 1.0,
+              //                           color: Colors.grey.shade300),
+              //                     ],
+              //                   ),
+              //                   child: SizedBox(
+              //                     height: 32,
+              //                     width: 32,
+              //                     child: IconButton(
+              //                       onPressed: (){
+              //                         print("Tapped here also");
+              //                       },
+              //                       iconSize: 24,
+              //                       icon: Icon(Icons.edit),
+              //                       color: Theme.of(context).buttonColor,
+              //                       padding: EdgeInsets.all(5),
+              //                       //visualDensity: VisualDensity.comfortable,
+              //                     ),
+              //                   ),
+              //                 ),
+              //                 onTap: (){
+              //                   print("Tapped here also");
+              //                 },
+              //               ),
+              //
+              //               SizedBox(
+              //                 width: 10,
+              //               ),
+              //
+              //               GestureDetector(
+              //                 onTap: (){
+              //                   print("Tapped RN");
+              //                 },
+              //                 child: Container(
+              //                   margin: EdgeInsets.only(left: 0),
+              //                   decoration: BoxDecoration(
+              //                     shape: BoxShape.circle,
+              //                     color: Colors.white,
+              //                     boxShadow: [
+              //                       BoxShadow(
+              //                           blurRadius: 5.0,
+              //                           spreadRadius: 1.0,
+              //                           color: Colors.grey.shade300),
+              //                     ],
+              //                   ),
+              //                   child: SizedBox(
+              //                       height: 32,
+              //                       width: 32,
+              //                       child: Center(
+              //                         child: Text(
+              //                           "RN",
+              //                           style: GoogleFonts.poppins(
+              //                             textStyle: TextStyle(
+              //                               color: Theme.of(context).buttonColor,
+              //                               fontWeight: FontWeight.w600
+              //                             ),
+              //                           ),
+              //                         ),
+              //                       )),
+              //                 ),
+              //               ),
+              //             ],
+              //           ),
+              //         ]),
+              //   ),
+              // ),
             ],
           )),
       floatingActionButton: FloatingActionButton(

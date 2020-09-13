@@ -1,6 +1,8 @@
-import 'package:hrm_app/models/LeaveRequestPOSTdata_Model.dart';
+import 'package:hrm_app/models/InsuranceSubmit_Model.dart';
+import 'package:hrm_app/models/LeaveRequestSubmit_Model.dart';
 import 'package:hrm_app/models/LeaveSummery_Mode.dart';
 import 'package:hrm_app/models/LeaveTypeCategory_Model.dart';
+import 'package:hrm_app/models/VisaSubmit_Model.dart';
 import 'package:hrm_app/models/success_for_post.dart';
 import 'package:hrm_app/resources/repository.dart';
 import 'package:rxdart/rxdart.dart';
@@ -24,13 +26,13 @@ class leave_request_bloc{
 
 
   fetchAllLeaveTypedata() async{
-    List<LeaveType_Model> leavetypefetch = await _repository.fetchAllLeaveTypedata("6");
+    List<LeaveType_Model> leavetypefetch = await _repository.fetchAllLeaveTypedata();
     _leavetypedataFetcher.sink.add(leavetypefetch);
   }
 
 
   fetchAllLeaveSummerydata() async{
-    List<LeaveSummery_Model> leavesummeryfetch = await _repository.fetchAllLeaveSummerydata("6");
+    List<LeaveSummery_Model> leavesummeryfetch = await _repository.fetchAllLeaveSummerydata();
     _leavesummerydataFetcher.sink.add(leavesummeryfetch);
   }
 
@@ -42,7 +44,23 @@ class leave_request_bloc{
     _successdataFetcher.sink.add(createLeave);
   }
 
-  //CreateLeavePost
+  CreateVisaPost(VisaSubmit data) async{
+
+    print("Leave Type ID is : "+ data.IssueDate.toString());
+
+    SuccessForPost createVisa = await _repository.CreateVisaPost(data);
+    _successdataFetcher.sink.add(createVisa);
+  }
+
+  CreateInsurancePost(InsuranceSubmit data) async{
+
+    print("Leave Type ID is : "+ data.expireDate.toString());
+
+    SuccessForPost createInsurance = await _repository.CreateInsurancePost(data);
+    _successdataFetcher.sink.add(createInsurance);
+  }
+
+  //CreateVisaPost
 
   void dispose() async{
 

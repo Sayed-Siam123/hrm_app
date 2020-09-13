@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hrm_app/Bloc/leave_request_bloc.dart';
 import 'package:hrm_app/ColorLibrary/HexColor.dart';
 import 'package:hrm_app/helper/MainPage.dart';
+import 'package:hrm_app/models/InsuranceSubmit_Model.dart';
 import 'package:hrm_app/pages/MyLoan.dart';
 import 'package:hrm_app/helper/DrawerWidget.dart';
 import 'package:intl/intl.dart';
@@ -27,6 +31,13 @@ class _MyInsurancePageState extends State<MyInsurancePage> {
   TextEditingController insuranefor = new TextEditingController();
   TextEditingController inPhoneNumber = new TextEditingController();
   TextEditingController inPolicyNumber = new TextEditingController();
+
+
+  bool _validate1;
+
+  String errortext1 = "*Date can\'t be empty";
+
+  InsuranceSubmit data;
 
   _selectExpireDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -56,10 +67,58 @@ class _MyInsurancePageState extends State<MyInsurancePage> {
       child: Scaffold(
         key: _scaffoldKey,
         drawer: DrawerWidget(scaffoldKey: _scaffoldKey,),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Theme.of(context).backgroundColor,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.storage),
+              title: Text("Request"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text("Profile"),
+            ),
+          ],
+          onTap: (index){
+            if(index.toString()=="0"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 0,)),
+              );
+            }
+
+            else if(index.toString()=="1"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+              );
+            }
+
+            else if(index.toString()=="2"){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage(currentIndex: 2,)),
+              );
+            }
+
+          },
+          iconSize: 25,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Colors.white,
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+        ),
         body: Container(
           color: Theme.of(context).accentColor,
           child: CustomScrollView(slivers: <Widget>[
             SliverAppBar(
+              floating: true,
               title: Text(
                 "My Insurance",
                 style: GoogleFonts.poppins(
@@ -96,180 +155,12 @@ class _MyInsurancePageState extends State<MyInsurancePage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-
-                                Container(
-                                  height: 55,
-                                  margin: EdgeInsets.fromLTRB(15, 40, 15, 0),
-                                  padding: EdgeInsets.fromLTRB(15, 4, 15, 0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          blurRadius: 5.0,
-                                          spreadRadius: 5.0,
-                                          offset: Offset(1, 1),
-                                          color: Colors.grey.shade600
-                                              .withOpacity(0.1)),
-                                    ],
-                                  ),
-                                  child: DropdownButton<String>(
-                                      hint: Text(
-                                        "Select Insurance Provider",
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                      isExpanded: true,
-                                      value: dropdownValue,
-                                      icon: Icon(Icons.unfold_more),
-                                      iconSize: 25,
-                                      underline: SizedBox(),
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          dropdownValue = newValue;
-                                        });
-                                        print(dropdownValue);
-                                      },
-                                      items: <String>[
-                                        'Casual',
-                                        'Medical',
-                                        'Urgent',
-                                      ].map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                            return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(
-                                                value,
-                                                style: GoogleFonts.poppins(
-                                                  textStyle:
-                                                  TextStyle(fontSize: 16),
-                                                ),
-                                              ),
-                                            );
-                                          }).toList()),
-                                ),
-
                                 Container(
                                     height: 55,
                                     width:
                                     MediaQuery.of(context).size.width,
                                     margin:
-                                    EdgeInsets.fromLTRB(15, 15, 15, 0),
-                                    padding:
-                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurRadius: 5.0,
-                                            spreadRadius: 5.0,
-                                            offset: Offset(1, 1),
-                                            color: Colors.grey.shade600
-                                                .withOpacity(0.1)),
-                                      ],
-                                    ),
-                                    child: TextField(
-                                      controller: insuranefor,
-                                      enabled: true,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        hintText: "Insurance for",
-                                        hintStyle: GoogleFonts.poppins(
-                                          textStyle:
-                                          TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    )),
-
-                                Container(
-                                    height: 55,
-                                    width:
-                                    MediaQuery.of(context).size.width,
-                                    margin:
-                                    EdgeInsets.fromLTRB(15, 15, 15, 0),
-                                    padding:
-                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurRadius: 5.0,
-                                            spreadRadius: 5.0,
-                                            offset: Offset(1, 1),
-                                            color: Colors.grey.shade600
-                                                .withOpacity(0.1)),
-                                      ],
-                                    ),
-                                    child: TextField(
-                                      controller: inPhoneNumber,
-                                      enabled: true,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        hintText: "Insurance phone number*",
-                                        hintStyle: GoogleFonts.poppins(
-                                          textStyle:
-                                          TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    )),
-
-                                Container(
-                                    height: 55,
-                                    width:
-                                    MediaQuery.of(context).size.width,
-                                    margin:
-                                    EdgeInsets.fromLTRB(15, 15, 15, 0),
-                                    padding:
-                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurRadius: 5.0,
-                                            spreadRadius: 5.0,
-                                            offset: Offset(1, 1),
-                                            color: Colors.grey.shade600
-                                                .withOpacity(0.1)),
-                                      ],
-                                    ),
-                                    child: TextField(
-                                      controller: inPolicyNumber,
-                                      enabled: true,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        errorBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none,
-                                        hintText: "Insurance policy number*",
-                                        hintStyle: GoogleFonts.poppins(
-                                          textStyle:
-                                          TextStyle(fontSize: 16),
-                                        ),
-                                      ),
-                                    )),
-
-                                Container(
-                                    height: 55,
-                                    width:
-                                    MediaQuery.of(context).size.width,
-                                    margin:
-                                    EdgeInsets.fromLTRB(15, 15, 15, 0),
+                                    EdgeInsets.fromLTRB(15, 35, 15, 0),
                                     padding:
                                     EdgeInsets.fromLTRB(15, 3, 5, 0),
                                     decoration: BoxDecoration(
@@ -311,6 +202,10 @@ class _MyInsurancePageState extends State<MyInsurancePage> {
                                           textStyle:
                                           TextStyle(fontSize: 16),
                                         ),
+                                          contentPadding: _validate1 == false ? EdgeInsets
+                                              .fromLTRB(0, 20, 0, 0) : EdgeInsets.fromLTRB(
+                                              0, 15, 0, 0),
+                                        errorText: _validate1 == false ? errortext1 : null,
                                       ),
                                     )),
 
@@ -358,45 +253,96 @@ class _MyInsurancePageState extends State<MyInsurancePage> {
                                 ),
 
 
-                                InkWell(
-                                  onTap: (){
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(builder: (context) => HomePage()),
-                                    // );
-                                  },
-                                  child: Container(
-                                    height: 55,
-                                    width:
-                                    MediaQuery.of(context).size.width,
-                                    margin:
-                                    EdgeInsets.fromLTRB(15, 20, 15, 0),
-                                    padding:
-                                    EdgeInsets.fromLTRB(15, 3, 5, 0),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).buttonColor,
-                                      borderRadius:
-                                      BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            blurRadius: 5.0,
-                                            spreadRadius: 5.0,
-                                            offset: Offset(1, 1),
-                                            color: Colors.grey.shade600
-                                                .withOpacity(0.1)),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: Text("SAVE",
-                                        style: GoogleFonts.poppins(
-                                          textStyle: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
+                                Builder(
+                                  builder: (context) => InkWell(
+                                    onTap: (){
+                                      if (expireDate.text.isEmpty && expireDate.text == "") {
+                                        print("KHali");
+                                        setState(() {
+                                          _validate1 = false;
+                                        });
+
+                                        //TODO:: Toast hobe ekta
+                                      } else {
+                                        _validate1 = true;
+                                      }
+                                      print("Vora");
+
+                                      data = InsuranceSubmit(
+                                        expireDate: expireDate.text.toString()
+                                      );
+
+
+
+                                      Timer(Duration(milliseconds: 50), () {
+                                        Scaffold.of(context).showSnackBar(SnackBar(
+                                          content: Text(
+                                            'Applied Successfully',
+                                            style: GoogleFonts.exo2(
+                                              textStyle: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          duration: Duration(seconds: 2),
+                                        ));
+                                      });
+
+                                      Timer(Duration(seconds: 2), () {
+                                        print(expireDate.text.toString() + "," +
+                                            expireDate.toString());
+
+                                        leaverequestbloc.CreateInsurancePost(data);
+                                        leaverequestbloc.dispose();
+
+                                        expireDate.text = "";
+
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => MainPage(currentIndex: 1,)),
+                                        );
+
+                                      });
+
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(builder: (context) => HomePage()),
+                                      // );
+                                    },
+                                    child: Container(
+                                      height: 55,
+                                      width:
+                                      MediaQuery.of(context).size.width,
+                                      margin:
+                                      EdgeInsets.fromLTRB(15, 20, 15, 0),
+                                      padding:
+                                      EdgeInsets.fromLTRB(15, 3, 5, 0),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).buttonColor,
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 5.0,
+                                              spreadRadius: 5.0,
+                                              offset: Offset(1, 1),
+                                              color: Colors.grey.shade600
+                                                  .withOpacity(0.1)),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text("SAVE",
+                                          style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
 
+                                    ),
                                   ),
                                 ),
                               ],
